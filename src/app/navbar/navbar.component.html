@@ -7,7 +7,7 @@
     </button>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbar2Label">ASHON</h5>
+        <h5 class="offcanvas-title" routerLink="/" id="offcanvasNavbar2Label" data-bs-dismiss="offcanvas">ASHON</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -17,11 +17,11 @@
               MEN'S COLLECTION
             </a>
             <ul class="dropdown-menu rounded-0">
-              <li><a class="dropdown-item" routerLink="/collections/men">MEN'S COLLECTION</a></li>
-              <li><a class="dropdown-item" routerLink="/collections/men/tshirts">T-SHIRTS</a></li>
-              <li><a class="dropdown-item" routerLink="/collections/men/shorts">SHORTS</a></li>
-              <li><a class="dropdown-item" routerLink="/collections/men/sweatshirts">SWEATSHIRTS</a></li>
-              <li><a class="dropdown-item" routerLink="/collections/men/joggers">JOGGERS</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/men" data-bs-dismiss="offcanvas">MEN'S COLLECTION</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/men/tshirts" data-bs-dismiss="offcanvas">T-SHIRTS</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/men/shorts" data-bs-dismiss="offcanvas">SHORTS</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/men/sweatshirts" data-bs-dismiss="offcanvas">SWEATSHIRTS</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/men/joggers" data-bs-dismiss="offcanvas">JOGGERS</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -29,23 +29,23 @@
               WOMEN'S COLLECTION
             </a>
             <ul class="dropdown-menu rounded-0">
-              <li><a class="dropdown-item" routerLink="/collections/women">WOMEN'S COLLECTION</a></li>
-              <li><a class="dropdown-item" routerLink="/collections/women/tshirts">T-SHIRTS</a></li>
-              <li><a class="dropdown-item" routerLink="/collections/women/shorts">SHORTS</a></li>
-              <li><a class="dropdown-item" routerLink="/collections/women/sweatshirts">SWEATSHIRTS</a></li>
-              <li><a class="dropdown-item" routerLink="/collections/women/joggers">JOGGERS</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/women" data-bs-dismiss="offcanvas">WOMEN'S COLLECTION</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/women/tshirts" data-bs-dismiss="offcanvas">T-SHIRTS</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/women/shorts" data-bs-dismiss="offcanvas">SHORTS</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/women/sweatshirts" data-bs-dismiss="offcanvas">SWEATSHIRTS</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/women/joggers" data-bs-dismiss="offcanvas">JOGGERS</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/shopping-cart">CART</a>
+            <a class="nav-link" routerLink="/shopping-cart" data-bs-dismiss="offcanvas">CART</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/account">ACCOUNT</a>
+            <a class="nav-link" routerLink="/account" data-bs-dismiss="offcanvas">ACCOUNT</a>
           </li>
         </ul>
         <form class="d-flex mt-3 mt-lg-0" role="search" [formGroup]="form" (ngSubmit)="searchProducts()">
           <input formControlName="searchParam" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-dark" type="submit">Search</button>
+          <button class="btn btn-outline-dark" type="submit" data-bs-dismiss="offcanvas">Search</button>
         </form>
       </div>
     </div>

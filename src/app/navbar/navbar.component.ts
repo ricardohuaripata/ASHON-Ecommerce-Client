@@ -7,13 +7,15 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   form: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.form = this.fb.group({
       searchParam: [''],
     });
+  }
+  ngOnInit(): void {
   }
 
   searchProducts() {
@@ -22,5 +24,9 @@ export class NavbarComponent {
     if (searchParam && searchParam.trim() != '') {
       this.router.navigate(['/search/' + searchParam]);
     }
+  }
+
+  closeOffcanvas(offcanvas: any) {
+    offcanvas.hide();
   }
 }

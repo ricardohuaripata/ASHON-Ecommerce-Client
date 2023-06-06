@@ -1,5 +1,5 @@
 <div class="container d-flex align-items-center justify-content-center">
-    <div class="col-lg-4">
+    <div class="row gy-3">
         <h3 class="text-center mb-4">CREAR CUENTA</h3>
         <form [formGroup]="form" (ngSubmit)="registerUser()">
             <div class="mb-3">
@@ -28,10 +28,10 @@
             </div>
         </form>
         <hr>
-        <br>
-        <h5 class="text-center mb-4">¿YA TIENES CUENTA?</h5>
 
         <div class="d-grid gap-2">
+            <p class="text-center mb-2">¿YA TIENES CUENTA?</p>
+
             <button type="submit" class="btn btn-outline-dark" routerLink="/account/login">INICIAR SESIÓN</button>
         </div>
     </div>
