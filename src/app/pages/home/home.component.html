@@ -1,0 +1,72 @@
+<div class="background-image-men">
+    <div class="overlay">
+        <h1>ASHON</h1>
+    </div>
+</div>
+<div *ngIf="contentLoaded" class="container">
+
+
+    <ng-container *ngIf="(menProducts.length || womenProducts.length)">
+
+        <ng-template [ngIf]="menProducts.length">
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                <div *ngFor="let product of menProducts" class="col">
+                    <div class="card h-100 rounded-0 border-0">
+                        <a [routerLink]="['/product', product._id]">
+                            <!-- Enlace a la página del producto -->
+                            <img [src]="product.mainImage" class="card-img-top rounded-0" alt="{{ product.name }}" />
+                        </a>
+                        <div class="card-body">
+                            <p class="card-title">{{ product.name }}</p>
+                            <p class="card-text">
+                                <span *ngIf="product.priceAfterDiscount < product.price" class="discount-price">
+                                    {{ product.priceAfterDiscount | currency }}
+                                </span>
+                                <span *ngIf="product.priceAfterDiscount < product.price" class="original-price">
+                                    {{ product.price | currency }}
+                                </span>
+                                <span *ngIf="product.priceAfterDiscount >= product.price">
+                                    {{ product.price | currency }}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template [ngIf]="womenProducts.length">
+            <hr>
+            <div class="background-image-women"></div>
+
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                <div *ngFor="let womenProduct of womenProducts" class="col">
+                    <div class="card h-100 rounded-0 border-0">
+                        <a [routerLink]="['/product', womenProduct._id]">
+                            <!-- Enlace a la página del producto -->
+                            <img [src]="womenProduct.mainImage" class="card-img-top rounded-0"
+                                alt="{{ womenProduct.name }}" />
+                        </a>
+                        <div class="card-body">
+                            <p class="card-title">{{ womenProduct.name }}</p>
+                            <p class="card-text">
+                                <span *ngIf="womenProduct.priceAfterDiscount < womenProduct.price"
+                                    class="discount-price">
+                                    {{ womenProduct.priceAfterDiscount | currency }}
+                                </span>
+                                <span *ngIf="womenProduct.priceAfterDiscount < womenProduct.price"
+                                    class="original-price">
+                                    {{ womenProduct.price | currency }}
+                                </span>
+                                <span *ngIf="womenProduct.priceAfterDiscount >= womenProduct.price">
+                                    {{ womenProduct.price | currency }}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </ng-container>
+
+</div>

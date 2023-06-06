@@ -1,0 +1,85 @@
+<div *ngIf="userDetails" class="container">
+    <h2 class="mb-4 text-center">ACCOUNT</h2>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4 rounded-0 border-0">
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <form [formGroup]="form" (ngSubmit)="updateUserDetails()">
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Nombre y apellidos</label>
+                                <div class="col-sm-10">
+                                    <input formControlName="name" type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Nombre de usuario</label>
+                                <div class="col-sm-10">
+                                    <input formControlName="username" type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Correo electrónico:</label>
+                                <div class="col-sm-10">
+                                    <input formControlName="email" type="email" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Número teléfono</label>
+                                <div class="col-sm-10">
+                                    <input formControlName="phone" type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Dirección</label>
+                                <div class="col-sm-10">
+                                    <input formControlName="address" type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button [disabled]="form.invalid" type="submit" class="btn btn-dark">GUARDAR CAMBIOS</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card rounded-0 border-0">
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-danger-custom btn-block" (click)="logout()">CERRAR SESIÓN</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card rounded-0 border-0">
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-dark btn-block" (click)="openChangePasswordModal()">CAMBIAR CONTRASEÑA</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card rounded-0 border-0">
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-dark btn-block" [routerLink]="'/account/my-orders'">MIS
+                            PEDIDOS</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

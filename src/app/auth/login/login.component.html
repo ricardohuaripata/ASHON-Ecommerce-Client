@@ -1,0 +1,25 @@
+<div class="container d-flex align-items-center justify-content-center">
+    <div class="col-lg-4">
+        <h3 class="text-center mb-4">INICIAR SESIÓN</h3>
+        <form [formGroup]="form" (ngSubmit)="loginUser()">
+            <div class="mb-3">
+                <label class="form-label">Correo electrónico</label>
+                <input formControlName="email" type="text" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Contraseña</label>
+                <input formControlName="password" type="password" class="form-control">
+            </div>
+            <div class="d-grid gap-2">
+                <button [disabled]="form.invalid" type="submit" class="btn btn-dark">INICIAR SESIÓN</button>
+            </div>
+        </form>
+        <hr>
+        <br>
+        <h5 class="text-center mb-4">¿NO TIENES CUENTA?</h5>
+
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-outline-dark" routerLink="/account/register">CREAR CUENTA</button>
+        </div>
+    </div>
+</div>

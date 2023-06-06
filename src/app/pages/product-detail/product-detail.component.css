@@ -1,0 +1,47 @@
+.container {
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+.original-price {
+  text-decoration: line-through; /* Tachado del precio original */
+}
+
+.discount-price {
+  color: #ff0000; /* Color rojo para el precio rebajado */
+}
+
+span {
+  font-size: 1.2rem; /* Ajusta el tamaño de fuente para el texto del precio */
+}
+
+.size-list,
+.color-list {
+  display: flex;
+}
+
+.size-option-cell,
+.color-option-cell {
+  flex: 0 0 auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.size-option-cell:hover,
+.color-option-cell:hover {
+  background-color: #f5f5f5;
+}
+
+.size-option-cell.selected,
+.color-option-cell.selected {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.size-option-text,
+.color-option-text {
+  font-size: 14px;
+  font-weight: bold;
+}

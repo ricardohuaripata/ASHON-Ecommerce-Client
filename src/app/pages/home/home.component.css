@@ -1,0 +1,38 @@
+.container {
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+.background-image-men {
+  margin-top: 70px;
+  margin-bottom: 50px;
+  background-image: url("https://static.pullandbear.net/2/cms/assets/uploads/contenido1_3.jpg?imwidth=1300&impolicy=pullandbear-itxmediumhigh&imformat=chrome&ts=20230531024202");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  height: 600px; /* Ajusta la altura según tus necesidades */
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+}
+
+.overlay h1 {
+  font-size: 105px; /* Ajusta el tamaño de fuente según tus necesidades */
+  text-shadow: 8px 8px 16px rgba(0, 0, 0, 0.8);
+}
+
+.background-image-women {
+  margin-bottom: 50px;
+  background-image: url("https://static.pullandbear.net/2/cms/assets/uploads/contenido1_7.jpg?imwidth=1300&impolicy=pullandbear-itxmediumhigh&imformat=chrome&ts=20230531113422");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  height: 600px; /* Ajusta la altura según tus necesidades */
+}

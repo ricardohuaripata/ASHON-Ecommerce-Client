@@ -1,0 +1,69 @@
+<div *ngIf="contentLoaded" class="container">
+    <h2 class="mb-4 text-center">DETALLES DEL PEDIDO</h2>
+
+    <div *ngIf="order" class="row">
+        <div class="col-md-6">
+            <div class="card mb-4 rounded-0 border-0">
+                <div class="card-body">
+                    <div *ngFor="let item of order.products" class="mb-4">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <a [routerLink]="['/product', item.product]">
+                                    <img [src]="getProductById(item.product)?.mainImage" alt="Product Image"
+                                        class="img-thumbnail border-0 rounded-0" width="100" height="100">
+                                </a>
+                            </div>
+                            <div class="col-md-10">
+                                <p class="mt-0">{{ getProductById(item.product)?.name }}</p>
+                                <p class="mb-0">Cantidad:
+                                    {{ item.totalProductQuantity }}
+                                </p>
+                                <p class="mb-0">Precio: {{ getProductById(item.product)?.priceAfterDiscount | currency
+                                    }}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="card rounded-0 border-0">
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-dark-custom btn-block" [routerLink]="'/account/my-orders'">VOLVER A MIS
+                            PEDIDOS</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card rounded-0 mt-5">
+                <div class="card-body">
+                    <h5 class="card-title">Detalles del pedido</h5>
+                    <hr>
+                    <h5 class="mt-3 mb-3">Pedido #{{ order._id }}</h5>
+                    <p [ngClass]="{ 'text-danger': order.status === 'Not Processed',
+                'text-primary': order.status === 'Processing',
+                'text-info': order.status === 'Shipped',
+                'text-success': order.status === 'Delivered',
+                'text-muted': order.status === 'Cancelled' }">
+                        <strong>Estado:</strong> {{ order.status }}
+                    </p>
+                    <p><strong>Total pagado:</strong> ${{ order.totalPrice }}</p>
+                    <p><strong>Fecha de pedido:</strong> {{ order.createdAt | date }}</p>
+                    <p><strong>Dirección de envío:</strong> {{ order.shippingAddress.address }}, {{
+                        order.shippingAddress.city }}, {{ order.shippingAddress.country }}</p>
+                    <p><strong>Teléfono de contacto:</strong> {{ order.phone }}</p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div *ngIf="!order" class="text-center">
+        <p>No existe este pedido</p>
+        <button class="btn btn-dark-custom btn-block" [routerLink]="'/'">IR A INICIO</button>
+
+    </div>
+</div>

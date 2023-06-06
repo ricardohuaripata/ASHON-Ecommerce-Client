@@ -1,0 +1,69 @@
+<div class="container">
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && product" class="row">
+    <div class="col-md-6">
+      <div id="productCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item" *ngFor="let image of product.images; let i = index" [class.active]="i === 0">
+            <img [src]="image" class="d-block w-100" alt="{{ product.name }}" />
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <h3 class="mb-3">{{ product.name }}</h3>
+      <pre class="mb-3">{{ product.description }}</pre>
+
+      <p class="mb-2">Precio: <span [class.original-price]="product.priceAfterDiscount < product.price">{{ product.price
+          | currency }}</span></p>
+      <p *ngIf="product.priceAfterDiscount < product.price" class="mb-2">Precio con descuento: <span
+          class="discount-price">{{ product.priceAfterDiscount | currency }}</span></p>
+
+      <div class="mb-4">
+        <p class="fw-bold">Tallas disponibles:</p>
+        <div class="size-list d-flex">
+          <div *ngFor="let size of product.sizes" class="size-option" [class.selected]="size._id === selectedSize"
+            (click)="selectedSize = size._id!">
+            <div class="size-option-cell" [style.backgroundColor]="size._id === selectedSize ? '#ccc' : 'transparent'">
+              <span class="size-option-text">{{ size.size }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <p class="fw-bold">Colores disponibles:</p>
+        <div class="color-list d-flex">
+          <div *ngFor="let color of product.colors" class="color-option"
+            [class.selected]="color._id === selectedColor" (click)="selectedColor = color._id!">
+            <div class="color-option-cell"
+              [style.backgroundColor]="color._id === selectedColor ? '#ccc' : 'transparent'">
+              <span class="color-option-text">{{ color.color }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="mb-4">
+        <button class="btn btn-success" (click)="addToCart()" [disabled]="disableAddToCartButton">Add to cart</button>
+      </div>
+
+      <!-- Aquí puedes agregar cualquier otra información adicional que desees mostrar -->
+    </div>
+  </div>
+</div>

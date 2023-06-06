@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light" aria-label="Offcanvas navbar large">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">ASHON</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"
+      aria-controls="offcanvasNavbar2">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbar2Label">ASHON</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav flex-grow-1 pe-3">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              MEN'S COLLECTION
+            </a>
+            <ul class="dropdown-menu rounded-0">
+              <li><a class="dropdown-item" routerLink="/collections/men">MEN'S COLLECTION</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/men/tshirts">T-SHIRTS</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/men/shorts">SHORTS</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/men/sweatshirts">SWEATSHIRTS</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/men/joggers">JOGGERS</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              WOMEN'S COLLECTION
+            </a>
+            <ul class="dropdown-menu rounded-0">
+              <li><a class="dropdown-item" routerLink="/collections/women">WOMEN'S COLLECTION</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/women/tshirts">T-SHIRTS</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/women/shorts">SHORTS</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/women/sweatshirts">SWEATSHIRTS</a></li>
+              <li><a class="dropdown-item" routerLink="/collections/women/joggers">JOGGERS</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/shopping-cart">CART</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/account">ACCOUNT</a>
+          </li>
+        </ul>
+        <form class="d-flex mt-3 mt-lg-0" role="search" [formGroup]="form" (ngSubmit)="searchProducts()">
+          <input formControlName="searchParam" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-dark" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>

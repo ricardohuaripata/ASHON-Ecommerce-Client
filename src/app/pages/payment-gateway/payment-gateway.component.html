@@ -1,0 +1,135 @@
+<div *ngIf="contentLoaded" class="container">
+  <main>
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-2" src="https://cdn-icons-png.flaticon.com/512/6993/6993594.png" alt=""
+        height="90">
+      <h3>COMPLETAR PEDIDO</h3>
+    </div>
+
+    <div class="row g-5" *ngIf="cart && cart.items.length > 0">
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-success">En el carrito</span>
+          <span class="badge bg-success rounded-pill">{{ cart.totalQuantity }}</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm rounded-0 orderCartItem"
+            [routerLink]="['/product', item.product]" *ngFor="let item of cart.items">
+            <img [src]="getProductById(item.product)?.mainImage" alt="Product Image"
+              class="img-thumbnail border-0 rounded-0" width="100" height="100">
+
+            <div class="ms-2">
+              <small class="my-0"><strong>{{ truncateText(getProductById(item.product)?.name!, 40) }}</strong></small>
+              <br>
+              <small class="text-muted">Color: <strong>{{ item.selectedColor.color }}</strong> / Talla: <strong>{{
+                  item.selectedSize.size }}</strong></small>
+              <br>
+              <small class="text-muted">Cantidad: <strong>{{ item.totalProductQuantity }}</strong></small>
+              <br>
+              <small class="text-muted">Precio: <strong>{{ getProductById(item.product)?.priceAfterDiscount | currency
+                  }}</strong></small>
+            </div>
+          </li>
+
+          <li class="list-group-item d-flex justify-content-between rounded-0">
+            <span>Total a pagar:</span>
+            <strong>{{ cart.totalPrice | currency }}</strong>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Datos de envío</h4>
+        <form [formGroup]="form" (ngSubmit)="submitOrder()" class="needs-validation" id="formulario">
+          <div class="row g-3">
+
+            <div class="col-12">
+              <label class="form-label">* Dirección de entrega</label>
+              <input type="text" class="form-control" required formControlName="address">
+              <div class="invalid-feedback">
+                Por favor, introduce la dirección de entrega.
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">* País</label>
+              <input type="text" class="form-control" maxlength="50" required formControlName="city">
+              <div class="invalid-feedback">
+                Pais requerido.
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">* Ciudad</label>
+              <input type="text" class="form-control" maxlength="50" required formControlName="country">
+              <div class="invalid-feedback">
+                Ciudad requerida.
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">* C. Postal</label>
+              <input type="text" class="form-control" minlength="4" maxlength="10" required
+                formControlName="postalCode">
+              <div class="invalid-feedback">
+                C. Postal requerido.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">* Número de Teléfono</label>
+              <input type="text" class="form-control" placeholder="ej: +34669090660" minlength="10" maxlength="15"
+                required formControlName="phone">
+              <div class="invalid-feedback">
+                Teléfono requerido.
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-4">
+
+          <h4 class="mb-3">Tarjeta</h4>
+
+          <div class="row gy-3">
+
+            <div class="col-md-6">
+              <label class="form-label">* Número de tarjeta</label>
+              <input type="text" class="form-control" placeholder="0000 0000 0000 0000" minlength="19" maxlength="19"
+                required formControlName="cardNumber">
+              <div class="invalid-feedback">
+                Número de tarjeta requerido
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label class="form-label">* Expiración</label>
+              <input type="text" class="form-control" placeholder="00/00" minlength="5" maxlength="5" required
+                formControlName="expDate">
+              <div class="invalid-feedback">
+                Fecha requerida
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label class="form-label">* CVC</label>
+              <input type="text" class="form-control" placeholder="000" minlength="3" maxlength="3" required
+                formControlName="cvc">
+              <div class="invalid-feedback">
+                CVC requerido
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-4">
+          <div class="d-grid gap-2">
+            <button class="btn btn-dark-custom" type="submit">CONFIRMAR MI PEDIDO</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <div *ngIf="(!cart || cart.items.length === 0)" class="text-center">
+    <p>No tienes productos en el carrito</p>
+    <button class="btn btn-dark-custom btn-block" [routerLink]="'/'">IR A COMPRAR</button>
+
+  </div>
+</div>

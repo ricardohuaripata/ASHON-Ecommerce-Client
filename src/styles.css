@@ -1,0 +1,103 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Dosis&display=swap");
+:root {
+  --bg-color1: #000000;
+  --bg-color2: #ffffff;
+  --bg-danger: #c20000;
+
+}
+
+body {
+  font-family: "Dosis", sans-serif;
+}
+
+.original-price {
+  text-decoration: line-through; /* Tachado del precio original */
+}
+
+.discount-price {
+  color: #ff0000; /* Color rojo para el precio rebajado */
+}
+
+.card-body span {
+  font-size: 1.2rem; /* Ajusta el tamaño de fuente para el texto del precio */
+}
+
+.btn-dark {
+  background-color: var(--bg-color1);
+}
+
+.btn-outline-dark:hover {
+  background-color: var(--bg-color1);
+}
+
+.btn {
+  height: 40px; /* Cambia la altura según tus necesidades */
+  border-radius: 0; /* Bordes rectos */
+}
+
+.btn-danger {
+  background-color: var(--bg-danger) !important;
+  border: none !important;
+}
+
+.cancel-button-class {
+  border: 1px solid var(--bg-color1) !important;
+  color: var(--bg-color1) !important;
+  font-weight: bold !important;
+  background-color: var(--bg-color2) !important;
+
+}
+
+.confirm-button-class {
+  border: 1px solid var(--bg-color1) !important;
+  color: var(--bg-color2) !important;
+  background-color: var(--bg-color1) !important;
+}
+
+.form-control {
+  height: 40px; /* Cambia la altura según tus necesidades */
+  border-radius: 0; /* Bordes rectos */
+}
+
+.navbar {
+  height: 70px; /* Ajusta la altura según tus necesidades */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.105);
+  background-color: var(--bg-color2) !important;
+}
+
+.offcanvas-body .dropdown-item:active {
+  background-color: var(--bg-color1);
+  color: var(--bg-color2);
+}
+
+
+.btn-dark-custom {
+  background: linear-gradient(to right, var(--bg-color1) 0%, var(--bg-color1) 50%, var(--bg-color2) 50%, var(--bg-color2) 100%);
+  background-size: 200% auto;
+  transition: background-position 0.9s ease;
+  color: var(--bg-color2);
+  border: 1px solid var(--bg-color1);
+
+}
+
+.btn-dark-custom:hover {
+  background-position: -100% 0;
+  border: 1px solid var(--bg-color1);
+  color: var(--bg-color1);
+}
+
+.btn-danger-custom {
+  background: linear-gradient(to right, var(--bg-danger) 0%, var(--bg-danger) 50%, var(--bg-color2) 50%, var(--bg-color2) 100%);
+  background-size: 200% auto;
+  transition: background-position 0.9s ease;
+  color: var(--bg-color2);
+  border: 1px solid var(--bg-danger);
+
+}
+
+.btn-danger-custom:hover {
+  background-position: -100% 0;
+  border: 1px solid var(--bg-danger);
+  color: var(--bg-danger);
+}

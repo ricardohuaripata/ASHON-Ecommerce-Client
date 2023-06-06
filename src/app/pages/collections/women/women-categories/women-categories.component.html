@@ -1,0 +1,35 @@
+<div class="container">
+    <h2 class="mb-4 text-center"> WOMEN'S {{ categoryName?.toUpperCase() }}</h2>
+    <div *ngIf="loading; else productList" class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <ng-template #productList>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div *ngFor="let product of products" class="col">
+                <div class="card h-100 rounded-0 border-0">
+                    <a [routerLink]="['/product', product._id]">
+                        <!-- Enlace a la página del producto -->
+                        <img [src]="product.mainImage" class="card-img-top rounded-0" alt="{{ product.name }}" />
+                    </a>
+                    <div class="card-body">
+                        <p class="card-title">{{ product.name }}</p>
+                        <p class="card-text">
+                            <span *ngIf="product.priceAfterDiscount < product.price" class="discount-price">
+                                {{ product.priceAfterDiscount | currency }}
+                            </span>
+                            <span *ngIf="product.priceAfterDiscount < product.price" class="original-price">
+                                {{ product.price | currency }}
+                            </span>
+                            <span *ngIf="product.priceAfterDiscount >= product.price">
+                                {{ product.price | currency }}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>
