@@ -33,11 +33,10 @@ export interface Order {
 }
 
 export interface OrderProduct {
-    _id?: string;
-    product: string;
-    selectedColor: Color;
-    selectedSize: Size;
-    totalProductQuantity: number;
-    totalProductPrice: number;
-  }
-  
+  _id?: string;
+  product: string;
+  selectedColor: Color;
+  selectedSize: Size;
+  totalProductQuantity: number;
+  totalProductPrice: number;
+}
