@@ -76,10 +76,8 @@ export class ShoppingCartComponent implements OnInit {
     selectedSize: string
   ): void {
     Swal.fire({
-      title: '¿Está seguro de eliminar este artículo?',
+      title: '¿Desea eliminar este artículo?',
       showCancelButton: true,
-      confirmButtonColor: '#000000',
-      cancelButtonColor: '#ffffff',
       confirmButtonText: 'Si',
       cancelButtonText: 'No',
       customClass: {
@@ -108,7 +106,8 @@ export class ShoppingCartComponent implements OnInit {
 
   clearCart(): void {
     Swal.fire({
-      title: '¿Está seguro de vaciar el carrito?',
+      title: '¿Desea vaciar el carrito?',
+      focusConfirm: false,
       showCancelButton: true,
       confirmButtonText: 'Si',
       cancelButtonText: 'No',

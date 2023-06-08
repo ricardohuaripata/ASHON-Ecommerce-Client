@@ -33,7 +33,7 @@ export class MenCategoriesComponent {
           this.categoryName!
         )
       ) {
-        this.router.navigate(['**']); // Redirigir al usuario a PageNotFoundComponent
+        this.router.navigate(['/']); // Redirigir al usuario
         return; // Salir del método para evitar la carga de productos no válidos
       }
       this.getMenProductsByCategory(this.categoryName!);

@@ -151,13 +151,11 @@ export class UserProfileComponent implements OnInit {
       title: 'Cambiar contraseña',
       html:
         '<input id="swal-input1" class="form-control my-1 mx-auto custom-input" placeholder="Contraseña actual" type="password">' +
-        '<br>' +
         '<input id="swal-input2" class="form-control my-1 mx-auto custom-input" placeholder="Nueva contraseña" type="password">' +
-        '<br>' +
         '<input id="swal-input3" class="form-control my-1 mx-auto custom-input" placeholder="Confirmar contraseña" type="password">',
       focusConfirm: false,
       showCancelButton: true,
-      confirmButtonText: 'Guardar',
+      confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar',
       customClass: {
         cancelButton: 'cancel-button-class',

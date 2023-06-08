@@ -110,5 +110,7 @@ body {
 }
 
 .custom-input {
-  width: 200px; /* Ajusta el ancho según tus necesidades */
+  width: 220px !important; /* Ajusta el ancho según tus necesidades */
+  height: 55px !important; /* Cambia la altura según tus necesidades */
+
 }

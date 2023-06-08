@@ -47,7 +47,7 @@ export class UserOrderDetailsComponent {
 
       },
       error: (event: HttpErrorResponse) => {
-        this.router.navigate(['**']); // Redirigir al usuario a PageNotFoundComponent
+        this.router.navigate(['/']); // Redirigir al usuario
       },
     });
   }

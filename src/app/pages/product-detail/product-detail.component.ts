@@ -44,10 +44,11 @@ export class ProductDetailComponent implements OnInit {
       },
       (error) => {
         this.loading = false;
-        this.router.navigate(['**']); // Redirigir al usuario a PageNotFoundComponent
+        this.router.navigate(['/']); // Redirigir al usuario
 
       }
     );
+    
   }
 
   addToCart(): void {

@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
         this.menProducts = data.products;
       },
       (error) => {
-        console.error(error);
       }
     );
 
@@ -35,7 +34,6 @@ export class HomeComponent implements OnInit {
         this.womenProducts = data.products;
       },
       (error) => {
-        console.error(error);
       }
     );
     
