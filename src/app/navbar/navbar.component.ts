@@ -15,8 +15,7 @@ export class NavbarComponent implements OnInit {
       searchParam: [''],
     });
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   searchProducts() {
     const searchParam = this.form.value.searchParam;
@@ -24,9 +23,5 @@ export class NavbarComponent implements OnInit {
     if (searchParam && searchParam.trim() != '') {
       this.router.navigate(['/search/' + searchParam]);
     }
-  }
-
-  closeOffcanvas(offcanvas: any) {
-    offcanvas.hide();
   }
 }

@@ -4,7 +4,6 @@
   --bg-color1: #000000;
   --bg-color2: #ffffff;
   --bg-danger: #c20000;
-
 }
 
 body {
@@ -46,7 +45,6 @@ body {
   color: var(--bg-color1) !important;
   font-weight: bold !important;
   background-color: var(--bg-color2) !important;
-
 }
 
 .confirm-button-class {
@@ -71,14 +69,18 @@ body {
   color: var(--bg-color2);
 }
 
-
 .btn-dark-custom {
-  background: linear-gradient(to right, var(--bg-color1) 0%, var(--bg-color1) 50%, var(--bg-color2) 50%, var(--bg-color2) 100%);
+  background: linear-gradient(
+    to right,
+    var(--bg-color1) 0%,
+    var(--bg-color1) 50%,
+    var(--bg-color2) 50%,
+    var(--bg-color2) 100%
+  );
   background-size: 200% auto;
   transition: background-position 0.9s ease;
   color: var(--bg-color2);
   border: 1px solid var(--bg-color1);
-
 }
 
 .btn-dark-custom:hover {
@@ -88,16 +90,25 @@ body {
 }
 
 .btn-danger-custom {
-  background: linear-gradient(to right, var(--bg-danger) 0%, var(--bg-danger) 50%, var(--bg-color2) 50%, var(--bg-color2) 100%);
+  background: linear-gradient(
+    to right,
+    var(--bg-danger) 0%,
+    var(--bg-danger) 50%,
+    var(--bg-color2) 50%,
+    var(--bg-color2) 100%
+  );
   background-size: 200% auto;
   transition: background-position 0.9s ease;
   color: var(--bg-color2);
   border: 1px solid var(--bg-danger);
-
 }
 
 .btn-danger-custom:hover {
   background-position: -100% 0;
   border: 1px solid var(--bg-danger);
   color: var(--bg-danger);
+}
+
+.custom-input {
+  width: 200px; /* Ajusta el ancho según tus necesidades */
 }
