@@ -13,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class EmailVerificationComponent implements OnInit {
   verificationSuccess: boolean = false;
   verificationError: boolean = false;
+  loading: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -21,18 +22,13 @@ export class EmailVerificationComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {
+    this.mostrarEsperaCarga();
     this.route.paramMap.subscribe((params) => {
       const token = params.get('token');
 
       if (token) {
         this.authService.verifyEmail(token).subscribe(
           (data: any) => {
-            Swal.fire({
-              icon: 'success',
-              title: data.message,
-              showConfirmButton: false,
-              timer: 1500,
-            });
             // Verificación exitosa
             this.verificationSuccess = true;
           },
@@ -41,10 +37,25 @@ export class EmailVerificationComponent implements OnInit {
             this.verificationError = true;
           }
         );
+
+        this.loading = false;
+        Swal.close(); // Cerrar el diálogo de espera una vez que se obtienen los productos
       } else {
         this.router.navigate(['/']); // Redirigir al usuario
         return;
       }
+    });
+  }
+
+  mostrarEsperaCarga() {
+    this.loading = true;
+
+    Swal.fire({
+      title: 'Loading...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
     });
   }
 }

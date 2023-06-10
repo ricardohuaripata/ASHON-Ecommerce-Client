@@ -1,4 +1,4 @@
-<div *ngIf="verificationSuccess || verificationError" class="container d-flex align-items-center justify-content-center">
+<div *ngIf="!loading" class="container d-flex align-items-center justify-content-center">
     <div class="card bg-light text-center rounded-0">
         <div class="card-body">
             <ng-container *ngIf="verificationSuccess">
