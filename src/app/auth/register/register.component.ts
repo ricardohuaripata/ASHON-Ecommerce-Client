@@ -32,6 +32,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   registerUser() {
+    this.form.disable;
+    this.mostrarEsperaCarga();
+
     const body = {
       name: this.form.get('name')?.value,
       username: this.form.get('username')?.value,
@@ -45,6 +48,8 @@ export class RegisterComponent implements OnInit {
     this._authService.register(body).subscribe({
       // si la peticion ha tenido exito
       next: (data: any) => {
+        Swal.close();
+
         Swal.fire({
           icon: 'success',
           title: data.message,
@@ -56,6 +61,8 @@ export class RegisterComponent implements OnInit {
       },
       // si se produce algun error en la peticion
       error: (event: HttpErrorResponse) => {
+        Swal.close();
+
         if (event.error.error.errors.email) {
           Swal.fire({
             icon: 'error',
@@ -83,4 +90,15 @@ export class RegisterComponent implements OnInit {
       },
     });
   }
+
+  mostrarEsperaCarga() {
+    Swal.fire({
+      title: 'Loading...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+  }
+
 }

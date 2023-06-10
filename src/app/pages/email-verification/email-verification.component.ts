@@ -32,13 +32,13 @@ export class EmailVerificationComponent implements OnInit {
             // Verificación exitosa
             this.verificationSuccess = true;
             this.loading = false;
-            Swal.close(); // Cerrar el diálogo de espera una vez que se obtienen los productos
+            Swal.close();
           },
           (error: HttpErrorResponse) => {
             // Verificación fallida
             this.verificationError = true;
             this.loading = false;
-            Swal.close(); // Cerrar el diálogo de espera una vez que se obtienen los productos
+            Swal.close();
           }
         );
       } else {
