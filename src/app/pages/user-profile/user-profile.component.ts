@@ -106,6 +106,7 @@ export class UserProfileComponent implements OnInit {
               icon: 'success',
               title: data.message,
               showConfirmButton: false,
+              allowOutsideClick: false,
               timer: 1500,
             });
           },
@@ -136,6 +137,7 @@ export class UserProfileComponent implements OnInit {
           icon: 'success',
           title: data.message,
           showConfirmButton: false,
+          allowOutsideClick: false,
           timer: 1500,
         });
       },
@@ -199,6 +201,7 @@ export class UserProfileComponent implements OnInit {
               icon: 'success',
               title: data.message,
               showConfirmButton: false,
+              allowOutsideClick: false,
               timer: 1500,
             });
           },

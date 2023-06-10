@@ -174,6 +174,7 @@ export class ShoppingCartComponent implements OnInit {
         icon: 'success',
         title: 'Código de descuento aplicado.',
         showConfirmButton: false,
+        allowOutsideClick: false,
         timer: 1500,
       });
 
@@ -183,6 +184,7 @@ export class ShoppingCartComponent implements OnInit {
         icon: 'error',
         title: 'Código de descuento inválido.',
         showConfirmButton: false,
+        allowOutsideClick: false,
         timer: 1500,
       });
     }

@@ -54,6 +54,7 @@ export class RegisterComponent implements OnInit {
           icon: 'success',
           title: data.message,
           showConfirmButton: false,
+          allowOutsideClick: false,
           timer: 1500,
         });
         localStorage.setItem('token', data.tokens.refreshToken);

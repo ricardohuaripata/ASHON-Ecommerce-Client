@@ -132,6 +132,7 @@ export class PaymentGatewayComponent implements OnInit {
           icon: 'success',
           title: data.message,
           showConfirmButton: false,
+          allowOutsideClick: false,
           timer: 1500,
         });
         this.router.navigate(['/account/my-orders/' + data.order._id]);
