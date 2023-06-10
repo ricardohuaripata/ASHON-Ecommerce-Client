@@ -179,4 +179,35 @@ export class UserProfileComponent implements OnInit {
       },
     });
   }
+
+  sendVerificationEmail() {
+    Swal.fire({
+      title: '¿Desea recibir un email de verificación',
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+      customClass: {
+        cancelButton: 'cancel-button-class',
+        confirmButton: 'confirm-button-class',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._authService.sendVerificationEmail().subscribe({
+          // si la peticion ha tenido exito
+          next: (data: any) => {
+            Swal.fire({
+              icon: 'success',
+              title: data.message,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          },
+          // si se produce algun error en la peticion
+          error: (event: HttpErrorResponse) => {
+            this._errorService.msgError(event);
+          },
+        });
+      }
+    });
+  }
 }

@@ -78,11 +78,19 @@ export class AuthService {
 
   verifyEmail(token: string): Observable<string> {
     const headers = new HttpHeaders().set('Accept-Language', 'es');
-    const params = new HttpParams().set('token', token); // Agrega el token como parámetro
 
     return this.http.post<string>(
-      this.serverUrl + this.apiUrl + '/verify-email',
-      { headers, params }
+      this.serverUrl + this.apiUrl + '/verify-email?token=' + token,
+      { headers }
+    );
+  }
+
+  sendVerificationEmail() {
+    const headers = new HttpHeaders().set('Accept-Language', 'es');
+
+    return this.http.post<string>(
+      this.serverUrl + this.apiUrl + '/send-verification-email',
+      { headers }
     );
   }
 
