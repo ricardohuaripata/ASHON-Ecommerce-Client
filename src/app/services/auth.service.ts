@@ -2,6 +2,7 @@ import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
+  HttpParams,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
@@ -72,6 +73,16 @@ export class AuthService {
       this.serverUrl + this.apiUrl + '/change-password',
       body,
       { headers }
+    );
+  }
+
+  verifyEmail(token: string): Observable<string> {
+    const headers = new HttpHeaders().set('Accept-Language', 'es');
+    const params = new HttpParams().set('token', token); // Agrega el token como parámetro
+
+    return this.http.post<string>(
+      this.serverUrl + this.apiUrl + '/verify-email',
+      { headers, params }
     );
   }
 

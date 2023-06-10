@@ -25,6 +25,7 @@ import { PaymentGatewayComponent } from './pages/payment-gateway/payment-gateway
 import { UserOrdersComponent } from './pages/user-profile/user-orders/user-orders.component';
 import { UserOrderDetailsComponent } from './pages/user-profile/user-orders/user-order-details/user-order-details.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { EmailVerificationComponent } from './pages/email-verification/email-verification.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
     UserOrdersComponent,
     UserOrderDetailsComponent,
     SearchPageComponent,
+    EmailVerificationComponent,
   ],
   imports: [
     BrowserModule,

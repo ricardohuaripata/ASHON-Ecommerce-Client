@@ -19,6 +19,7 @@ import { PaymentGatewayComponent } from './pages/payment-gateway/payment-gateway
 import { UserOrdersComponent } from './pages/user-profile/user-orders/user-orders.component';
 import { UserOrderDetailsComponent } from './pages/user-profile/user-orders/user-order-details/user-order-details.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { EmailVerificationComponent } from './pages/email-verification/email-verification.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,12 +31,12 @@ const routes: Routes = [
   { path: 'collections/women/:categoryName', component: WomenCategoriesComponent },
   { path: 'product/:id', component: ProductDetailComponent },
   { path: 'search/:searchParam', component: SearchPageComponent },
+  { path: 'verify-email/:token', component: EmailVerificationComponent },
   { path: 'account', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'account/my-orders', component: UserOrdersComponent, canActivate: [AuthGuard] },
   { path: 'account/my-orders/:orderId', component: UserOrderDetailsComponent, canActivate: [AuthGuard] },
   { path: 'shopping-cart', component: ShoppingCartComponent, canActivate: [AuthGuard] },
   { path: 'shopping-cart/checkout', component: PaymentGatewayComponent, canActivate: [AuthGuard] },
-
   //controlar pagina no encontrada
   {path: '**', component: PageNotFoundComponent},
 ];
