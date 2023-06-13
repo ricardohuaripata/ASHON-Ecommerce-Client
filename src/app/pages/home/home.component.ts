@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 import { Product } from 'src/app/interfaces/product';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   menProducts: Product[] = [];
@@ -25,22 +25,19 @@ export class HomeComponent implements OnInit {
       (data: any) => {
         this.menProducts = data.products;
       },
-      (error) => {
-      }
+      (error) => {}
     );
 
     this.productService.getCollectionByGenre('women').subscribe(
       (data: any) => {
         this.womenProducts = data.products;
       },
-      (error) => {
-      }
+      (error) => {}
     );
-    
+
     // Simulación de tiempo de carga
     setTimeout(() => {
       this.contentLoaded = true;
     }, 1000);
-
   }
 }

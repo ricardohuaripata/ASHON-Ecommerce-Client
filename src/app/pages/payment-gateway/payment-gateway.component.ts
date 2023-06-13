@@ -5,7 +5,7 @@ import { OrderService } from 'src/app/services/order.service';
 import { ErrorService } from 'src/app/services/error.service'; // servicio para mostrar mensajes de errores devueltos por el backend
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { Cart  } from 'src/app/interfaces/cart';
+import { Cart } from 'src/app/interfaces/cart';
 import { CartService } from 'src/app/services/cart.service';
 import { Product } from 'src/app/interfaces/product';
 import { ProductsService } from 'src/app/services/products.service';
@@ -27,11 +27,9 @@ export class PaymentGatewayComponent implements OnInit {
     private _errorService: ErrorService,
     private _orderService: OrderService,
     private cartService: CartService,
-    private productsService: ProductsService,
-
+    private productsService: ProductsService
   ) {
     this.form = this.fb.group({
-
       address: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
@@ -43,7 +41,6 @@ export class PaymentGatewayComponent implements OnInit {
       //expMonth: ['', Validators.required],
       //expYear: ['', Validators.required],
       cvc: ['', Validators.required],
-
     });
   }
 
@@ -59,7 +56,7 @@ export class PaymentGatewayComponent implements OnInit {
     this.cartService.getCart().subscribe(
       (data: any) => {
         this.cart = data.cart;
-        if(this.cart && this.cart.items.length > 0) {
+        if (this.cart && this.cart.items.length > 0) {
           this.getProducts();
         }
       },
@@ -75,7 +72,6 @@ export class PaymentGatewayComponent implements OnInit {
     }
     return text;
   }
-  
 
   getProducts(): void {
     const productIds = this.cart?.items.map((item) => item.product) || [];
@@ -95,8 +91,8 @@ export class PaymentGatewayComponent implements OnInit {
 
   submitOrder() {
     if (this.form.invalid) {
-      const formulario = document.getElementById('formulario')
-      formulario?.classList.add('was-validated')
+      const formulario = document.getElementById('formulario');
+      formulario?.classList.add('was-validated');
       return;
     }
 
@@ -105,7 +101,7 @@ export class PaymentGatewayComponent implements OnInit {
     let expDate = this.form.get('expDate')?.value;
 
     let parts = expDate.split('/'); // Dividir la fecha en dos partes usando la barra como separador
-    
+
     let expMonth = parts[0];
     let expYear = parts[1];
 
@@ -122,7 +118,6 @@ export class PaymentGatewayComponent implements OnInit {
       expMonth: expMonth,
       expYear: expYear,
       cvc: this.form.get('cvc')?.value,
-
     };
 
     this._orderService.createOrder(body).subscribe({
@@ -139,12 +134,8 @@ export class PaymentGatewayComponent implements OnInit {
       },
       // si se produce algun error en la peticion
       error: (event: HttpErrorResponse) => {
-          this._errorService.msgError(event);
-        
+        this._errorService.msgError(event);
       },
     });
-
-
   }
-
 }

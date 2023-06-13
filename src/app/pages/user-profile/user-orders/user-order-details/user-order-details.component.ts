@@ -44,7 +44,6 @@ export class UserOrderDetailsComponent {
       next: (data: any) => {
         this.order = data.order;
         this.getProducts();
-
       },
       error: (event: HttpErrorResponse) => {
         this.router.navigate(['/']); // Redirigir al usuario
@@ -68,5 +67,4 @@ export class UserOrderDetailsComponent {
   getProductById(productId: string): Product | undefined {
     return this.products.find((product) => product._id === productId);
   }
-
 }

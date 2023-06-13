@@ -27,7 +27,6 @@ export class ProductDetailComponent implements OnInit {
     private cartService: CartService,
     private router: Router,
     private _errorService: ErrorService
-
   ) {}
 
   ngOnInit(): void {
@@ -45,45 +44,40 @@ export class ProductDetailComponent implements OnInit {
       (error) => {
         this.loading = false;
         this.router.navigate(['/']); // Redirigir al usuario
-
       }
     );
-    
   }
 
   addToCart(): void {
     if (this.selectedSize !== '' && this.selectedColor !== '') {
-
       this.disableAddToCartButton = true;
 
-      this.cartService.addToCart(this.product._id, 1, this.selectedColor, this.selectedSize).subscribe({
-        // si la peticion ha tenido exito
-        next: (data: any) => {
+      this.cartService
+        .addToCart(this.product._id, 1, this.selectedColor, this.selectedSize)
+        .subscribe({
+          // si la peticion ha tenido exito
+          next: (data: any) => {
+            Swal.fire({
+              icon: 'success',
+              title: data.message,
+              showConfirmButton: false,
+              timer: 1500,
+            });
 
-          Swal.fire({
-            icon: 'success',
-            title: data.message,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          
-          this.disableAddToCartButton = false;
-
-        },
-        // si se produce algun error en la peticion
-        error: () => {
-          this.disableAddToCartButton = false;
-        },
-      });
-    
+            this.disableAddToCartButton = false;
+          },
+          // si se produce algun error en la peticion
+          error: () => {
+            this.disableAddToCartButton = false;
+          },
+        });
     } else {
       Swal.fire({
         icon: 'error',
         title: 'Por favor, seleccione talla y color',
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
     }
   }
-
 }
