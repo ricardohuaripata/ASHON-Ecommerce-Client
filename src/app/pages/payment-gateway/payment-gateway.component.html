@@ -5,7 +5,7 @@
       <div class="py-5 text-center">
         <img class="d-block mx-auto mb-2" src="https://cdn-icons-png.flaticon.com/512/6993/6993594.png" alt=""
           height="90">
-        <h3>COMPLETAR PEDIDO</h3>
+        <h2>COMPLETAR PEDIDO</h2>
       </div>
 
       <div class="row g-5" *ngIf="cart && cart.items.length > 0">
@@ -78,7 +78,7 @@
                 </div>
               </div>
               <div class="col-md-4">
-                <label class="form-label">* Número de Teléfono</label>
+                <label class="form-label">* Número de teléfono</label>
                 <input type="text" class="form-control" placeholder="ej: +34669090660" minlength="10" maxlength="15"
                   required formControlName="phone">
                 <div class="invalid-feedback">
@@ -130,7 +130,7 @@
       </div>
     </main>
     <div *ngIf="(!cart || cart.items.length === 0)" class="text-center">
-      <p>No tienes productos en el carrito</p>
+      <p>No tienes productos para pagar</p>
       <button class="btn btn-dark-custom btn-block" [routerLink]="'/'">IR A COMPRAR</button>
 
     </div>

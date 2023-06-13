@@ -2,7 +2,7 @@
     <h2 class="mb-4 text-center">DETALLES DEL PEDIDO</h2>
 
     <div *ngIf="order" class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card mb-4 rounded-0 border-0">
                 <div class="card-body">
                     <div *ngFor="let item of order.products" class="mb-4">
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
 
             <div class="card rounded-0 border-0">
                 <div class="card-body">
@@ -42,7 +42,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Detalles del pedido</h5>
                     <hr>
-                    <h5 class="mt-3 mb-3">Pedido #{{ order._id }}</h5>
+                    <h5 class="mt-3 mb-3">Ref #{{ order._id }}</h5>
                     <p [ngClass]="{ 'text-danger': order.status === 'Not Processed',
                 'text-primary': order.status === 'Processing',
                 'text-info': order.status === 'Shipped',
