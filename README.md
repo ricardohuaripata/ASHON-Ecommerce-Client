@@ -1,9 +1,10 @@
 # ASHON Ecommerce Frontend
 
-![](Ashon-Docs/final-design/pc/home-page-1.png)
-![](Ashon-Docs/final-design/pc/home-page-2.png)
-![](Ashon-Docs/final-design/pc/search-1-page.png)
-![](Ashon-Docs/final-design/pc/product-detail-1-page.png)
-![](Ashon-Docs/final-design/pc/cart-1-page.png)
-![](Ashon-Docs/final-design/pc/my-orders-page.png)
-![](Ashon-Docs/final-design/pc/order-details-page.png)
+![](screenshots/home-page-1.png)
+![](screenshots/home-page-2.png)
+![](screenshots/search-1-page.png)
+![](screenshots/product-detail-1-page.png)
+![](screenshots/cart-1-page.png)
+![](screenshots/payment-gateway-1-page.png)
+![](screenshots/my-orders-page.png)
+![](screenshots/order-details-page.png)
