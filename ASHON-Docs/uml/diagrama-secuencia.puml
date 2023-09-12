@@ -1,0 +1,28 @@
+@startuml
+actor Usuario
+participant "Sistema de Autenticación" as AuthSystem
+participant "Catálogo de Productos" as ProductCatalog
+participant "Detalle Producto" as ProductDetail
+participant Carrito
+participant "Sistema de Revisión y Pago" as CheckoutSystem
+participant "Sistema de Pedido" as OrderSystem
+
+Usuario -> ProductCatalog: Busca productos
+ProductCatalog -> Usuario: Muestra productos
+Usuario -> ProductDetail: Ver detalles de un producto
+ProductDetail -> Usuario: Muestra detalles del producto
+Usuario -> Carrito: Añade el producto al carrito
+Carrito -> ProductDetail: Obtiene información del producto añadido
+ProductDetail -> Carrito: Envía información del producto
+Usuario -> Carrito: Revisa y modifica el carrito
+Usuario -> CheckoutSystem: Inicia proceso de revisión y pago
+CheckoutSystem -> AuthSystem: Verifica autenticación
+AuthSystem --> CheckoutSystem: Usuario autenticado
+CheckoutSystem -> Carrito: Obtiene información del carrito
+CheckoutSystem -> OrderSystem: Crea un nuevo pedido
+OrderSystem -> CheckoutSystem: Confirmación del pedido creado
+CheckoutSystem -> OrderSystem: Realiza el pago del pedido
+OrderSystem -> CheckoutSystem: Confirmación de pago exitoso
+CheckoutSystem --> Usuario: Respuesta de éxito del pago
+
+@enduml

@@ -26,6 +26,7 @@ import { UserOrdersComponent } from './pages/user-profile/user-orders/user-order
 import { UserOrderDetailsComponent } from './pages/user-profile/user-orders/user-order-details/user-order-details.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { EmailVerificationComponent } from './pages/email-verification/email-verification.component';
+import { CookieConsentComponent } from './cookie-consent/cookie-consent.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { EmailVerificationComponent } from './pages/email-verification/email-ver
     UserOrderDetailsComponent,
     SearchPageComponent,
     EmailVerificationComponent,
+    CookieConsentComponent,
   ],
   imports: [
     BrowserModule,

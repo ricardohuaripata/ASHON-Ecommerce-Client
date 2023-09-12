@@ -1,0 +1,28 @@
+@startuml
+actor User
+participant "Authentication System" as AuthSystem
+participant "Product Catalog" as ProductCatalog
+participant "Product Detail" as ProductDetail
+participant Cart
+participant "Checkout System" as CheckoutSystem
+participant "Order System" as OrderSystem
+
+User -> ProductCatalog: Search for products
+ProductCatalog -> User: Display products
+User -> ProductDetail: View product details
+ProductDetail -> User: Display product details
+User -> Cart: Add product to cart
+Cart -> ProductDetail: Get information for added product
+ProductDetail -> Cart: Send product information
+User -> Cart: Review and modify cart
+User -> CheckoutSystem: Initiate review and payment process
+CheckoutSystem -> AuthSystem: Verify authentication
+AuthSystem --> CheckoutSystem: User authenticated
+CheckoutSystem -> Cart: Get cart information
+CheckoutSystem -> OrderSystem: Create a new order
+OrderSystem -> CheckoutSystem: Order confirmation created
+CheckoutSystem -> OrderSystem: Process payment for the order
+OrderSystem -> CheckoutSystem: Successful payment confirmation
+CheckoutSystem --> User: Payment success response
+
+@enduml

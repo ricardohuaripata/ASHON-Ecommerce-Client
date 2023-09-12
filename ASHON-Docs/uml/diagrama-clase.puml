@@ -1,0 +1,137 @@
+@startuml
+
+class Usuario {
+  + nombre: String
+  + email: String
+  + contraseña: String
+  + dirección: String
+  + teléfono: String
+  + actualizarInformacion(detalles: Object): void
+  + cambiarContraseña(actual: string, nueva: string, confirmarNueva: string): void
+  + eliminarCuenta(): void
+}
+
+class Descuento {
+    + codigoDescuento: String,
+    + porcentajeDescuento: String,
+    + disponible: boolean
+    + obtenerCodigosDescuento(): List<Descuento>
+    + obtenerDescuento(codigo: String): Descuento
+    + verificarCodigoDescuento(codigo: String): boolean
+    + generarCodigoDescuento(): String
+    + eliminarCodigoDescuento(codigo: String): void
+    + cancelarCodigoDescuento(codigo: String): void
+
+}
+
+class Producto {
+  + nombre: String
+  + descripción: String
+  + precio: float
+  + stock: int
+  + vendidos: int
+  + fueraDeStock: boolean
+  + porcentajeDescuento: int
+  + precioConDescuento: float
+  + categoría: Categoria
+  + imagenPrincipal: String
+  + imagenes: String
+  + color: List<Color>
+  + tallas: List<Talla>
+  + consultarProductos(): List<Producto>
+  + consultarProductoPorId(id: String): Producto
+  + crearProducto(producto: Producto): void
+  + actualizarDetallesProducto(id: String, detalles: Object): void
+  + agregarColorProducto(id: String, color: String): void
+  + agregarTallaProducto(id: String, talla: String): void
+  + eliminarColorProducto(id: String, color: String): void
+  + eliminarTallaProducto(id: String, talla: String): void
+  + actualizarImagenPrincipalProducto(id: String, imagen: String): void
+  + actualizarImágenesProducto(id: String, imágenes: List<String>): void
+  + eliminarProducto(id: String): void
+  + obtenerEstadísticasProducto(): Object
+}
+
+class Categoria {
+  + nombre: String
+  + imagen: String
+  + crearCategoría(categoría: Categoría): void
+  + consultarCategorías(): List<Categoría>
+  + consultarCategoría(id: String): Categoría
+  + actualizarDetallesCategoría(id: String, detalles: Object): void
+  + actualizarImagenCategoría(id: String, imagen: Imagen): void
+  + eliminarCategoríaPorId(id: String): void
+}
+
+class Color {
+  + nombre: String
+  + product: List<Product>
+}
+
+class Talla {
+  + nombre: String
+  + product: List<Product>
+}
+
+class Carrito {
+  + productosCarrito: Object[]
+  + total: float
+  + usuario: Usuario
+  + agregarProducto(id: String, color: String, talla: String): void
+  + eliminarProducto(id: String, color: String, talla: String): void
+  + reducirPorUno(id: String, color: String, talla: String): void
+  + aumentarPorUno(id: String, color: String, talla: String): void
+  + vaciarCarrito(): void
+  + consultarCarrito(): Object[]
+}
+
+class Pedido {
+  + númeroPedido: String
+  + pagoStripeId: String
+  + fecha: Date
+  + productosCarrito: Object[]
+  + estado: String
+  + total: float
+  + totalCantidad: int
+  + usuario: Usuario
+  + crearPedido(usuario: Usuario): void
+  + actualizarEstado(estado: String): void
+  + consultarPedidos(): List<Pedido>
+  + consultarPedido(id: String): Pedido
+  + cancelarPedido(id: String): void
+}
+
+class Reseña {
+  + usuario: Usuario
+  + calificación: int
+  + comentario: String
+  + product: Producto
+  + publicarReseña(calificacion: int, comentario: String): void
+  + consultarReseñas(): List<Reseña>
+  + consultarReseñaPorId(id: String): Reseña
+  + actualizarReseña(id: String, calificacion: int, comentario: String): void
+  + eliminarReseña(id: String): void
+}
+
+class Favoritos {
+  + usuario: Usuario
+  + productos: List<Producto>
+  + agregarFavorito(producto: Producto): void
+  + eliminarFavorito(producto: Producto): void
+  + obtenerListaFavoritos(): List<Producto>
+}
+
+Usuario "1" -- "1" Carrito
+Usuario "1" -- "1..*" Pedido
+Usuario "0..*" -- "0..*" Favoritos
+Usuario "0..*" -- "0..*" Reseña
+Usuario "0..1" -- "0..*" Descuento
+Producto "1" -- "0..*" Pedido
+Producto "1" -- "0..*" Carrito
+Producto "1" -- "1" Categoria
+Producto "1" -- "1..*" Color
+Producto "1" -- "1..*" Talla
+Producto "0..*" -- "0..*" Reseña
+Favoritos "1" -- "0..*" Producto
+
+@enduml

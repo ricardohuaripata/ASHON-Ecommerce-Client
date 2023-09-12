@@ -1,0 +1,136 @@
+@startuml
+
+class User {
+  + name: String
+  + email: String
+  + password: String
+  + address: String
+  + phone: String
+  + updateInformation(details: Object): void
+  + changePassword(current: string, newPassword: string, confirmNew: string): void
+  + deleteAccount(): void
+}
+
+class Discount {
+    + discountCode: String
+    + discountPercentage: String
+    + available: boolean
+    + getAllDiscountCodes(): List<Discount>
+    + getDiscount(code: String): Discount
+    + verifyDiscountCode(code: String): boolean
+    + generateDiscountCode(): String
+    + deleteDiscountCode(code: String): void
+    + cancelDiscountCode(code: String): void
+}
+
+class Product {
+  + name: String
+  + description: String
+  + price: float
+  + stock: int
+  + sold: int
+  + outOfStock: boolean
+  + discountPercentage: int
+  + priceWithDiscount: float
+  + category: Category
+  + mainImage: String
+  + images: String
+  + colors: List<Color>
+  + sizes: List<Size>
+  + queryProducts(): List<Product>
+  + queryProductById(id: String): Product
+  + createProduct(product: Product): void
+  + updateProductDetails(id: String, details: Object): void
+  + addProductColor(id: String, color: String): void
+  + addProductSize(id: String, size: String): void
+  + deleteProductColor(id: String, color: String): void
+  + deleteProductSize(id: String, size: String): void
+  + updateProductMainImage(id: String, image: String): void
+  + updateProductImages(id: String, images: List<String>): void
+  + deleteProduct(id: String): void
+  + getProductStats(): Object
+}
+
+class Category {
+  + name: String
+  + image: String
+  + createCategory(category: Category): void
+  + queryCategories(): List<Category>
+  + queryCategory(id: String): Category
+  + updateCategoryDetails(id: String, details: Object): void
+  + updateCategoryImage(id: String, image: Image): void
+  + deleteCategoryById(id: String): void
+}
+
+class Color {
+  + name: String
+  + products: List<Product>
+}
+
+class Size {
+  + name: String
+  + products: List<Product>
+}
+
+class Cart {
+  + cartItems: Object[]
+  + total: float
+  + user: User
+  + addProduct(id: String, color: String, size: String): void
+  + removeProduct(id: String, color: String, size: String): void
+  + reduceByOne(id: String, color: String, size: String): void
+  + increaseByOne(id: String, color: String, size: String): void
+  + clearCart(): void
+  + queryCart(): Object[]
+}
+
+class Order {
+  + orderNumber: String
+  + stripePaymentId: String
+  + date: Date
+  + cartItems: Object[]
+  + status: String
+  + total: float
+  + totalQuantity: int
+  + user: User
+  + createOrder(user: User): void
+  + updateStatus(status: String): void
+  + queryOrders(): List<Order>
+  + queryOrder(id: String): Order
+  + cancelOrder(id: String): void
+}
+
+class Review {
+
+user: User
+rating: int
+comment: String
+product: Product
+publishReview(rating: int, comment: String): void
+queryReviews(): List<Review>
+queryReviewById(id: String): Review
+updateReview(id: String, rating: int, comment: String): void
+deleteReview(id: String): void
+}
+class Favorites {
+
+user: User
+products: List<Product>
+addFavoriteProduct(product: Product): void
+deleteProductFromFavorite(product: Product): void
+getFavoriteList(): List<Product>
+}
+User "1" -- "1" Cart
+User "1" -- "1.." Order
+User "0.." -- "0.." Favorites
+User "0.." -- "0.." Review
+User "0..1" -- "0.." Discount
+Product "1" -- "0.." Order
+Product "1" -- "0.." Cart
+Product "1" -- "1" Category
+Product "1" -- "1.." Color
+Product "1" -- "1.." Size
+Product "0.." -- "0.." Review
+Favorites "1" -- "0..*" Product
+
+@enduml

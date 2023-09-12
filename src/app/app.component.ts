@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  cookiesAccepted = false;
   title = 'tfg_ecommerce_client';
+  ngOnInit() {
+    this.cookiesAccepted = localStorage.getItem('cookiesAccepted') === 'true';
+  }
 }
