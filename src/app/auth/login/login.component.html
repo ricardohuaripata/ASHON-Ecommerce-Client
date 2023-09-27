@@ -1,13 +1,13 @@
 <div class="container d-flex align-items-center justify-content-center">
     <div class="row gy-3">
-        <h3 class="text-center mb-4">INICIAR SESIÓN</h3>
+        <h3 class="text-center">INICIAR SESIÓN</h3>
         <form [formGroup]="form" (ngSubmit)="loginUser()">
             <div class="mb-3">
-                <label class="form-label">Correo electrónico</label>
+                <label class="form-label">Correo electrónico:</label>
                 <input formControlName="email" type="text" class="form-control">
             </div>
             <div class="mb-3">
-                <label class="form-label">Contraseña</label>
+                <label class="form-label">Contraseña:</label>
                 <input formControlName="password" type="password" class="form-control">
             </div>
             <div class="d-grid gap-2">
@@ -16,8 +16,7 @@
         </form>
         <hr>
         <div class="d-grid gap-2">
-            <p class="text-center mb-2">¿NO TIENES CUENTA?</p>
-            <button type="submit" class="btn btn-outline-dark" routerLink="/account/register">CREAR CUENTA</button>
+            <p class="text-center mb-2">¿No tienes cuenta? <a href="/account/register">Regístrate aquí</a></p>
         </div>
     </div>
 </div>

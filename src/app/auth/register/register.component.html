@@ -1,25 +1,25 @@
 <div class="container d-flex align-items-center justify-content-center">
     <div class="row gy-3">
-        <h3 class="text-center mb-4">CREAR CUENTA</h3>
+        <h3 class="text-center">CREAR CUENTA</h3>
         <form [formGroup]="form" (ngSubmit)="registerUser()">
             <div class="mb-3">
-                <label class="form-label">Nombre y apellidos</label>
+                <label class="form-label">*Nombre y apellidos:</label>
                 <input formControlName="name" type="text" class="form-control">
             </div>
             <div class="mb-3">
-                <label class="form-label">Nombre de usuario</label>
+                <label class="form-label">*Nombre de usuario:</label>
                 <input formControlName="username" type="text" class="form-control">
             </div>
             <div class="mb-3">
-                <label class="form-label">Correo electrónico</label>
+                <label class="form-label">*Correo electrónico:</label>
                 <input formControlName="email" type="email" class="form-control">
             </div>
             <div class="mb-3">
-                <label class="form-label">Contraseña</label>
+                <label class="form-label">*Contraseña:</label>
                 <input formControlName="password" type="password" class="form-control">
             </div>
             <div class="mb-3">
-                <label class="form-label">Confirmar contraseña</label>
+                <label class="form-label">*Repetir contraseña:</label>
                 <input formControlName="passwordConfirmation" type="password" class="form-control">
             </div>
             
@@ -30,9 +30,8 @@
         <hr>
 
         <div class="d-grid gap-2">
-            <p class="text-center mb-2">¿YA TIENES CUENTA?</p>
+            <p class="text-center mb-2">¿Ya tienes cuenta? <a href="/account/login">Iniciar sesión</a></p>
 
-            <button type="submit" class="btn btn-outline-dark" routerLink="/account/login">INICIAR SESIÓN</button>
         </div>
     </div>
 </div>
