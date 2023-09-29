@@ -84,6 +84,8 @@ export class ShoppingCartComponent implements OnInit {
         cancelButton: 'cancel-button-class',
         confirmButton: 'confirm-button-class',
       },
+      allowOutsideClick: false,
+
     }).then((result) => {
       if (result.isConfirmed) {
         if (!this.cart) return;
@@ -115,6 +117,8 @@ export class ShoppingCartComponent implements OnInit {
         cancelButton: 'cancel-button-class',
         confirmButton: 'confirm-button-class',
       },
+      allowOutsideClick: false,
+
     }).then((result) => {
       if (result.isConfirmed) {
         if (!this.cart) return;

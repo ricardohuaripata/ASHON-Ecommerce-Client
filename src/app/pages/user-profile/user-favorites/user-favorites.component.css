@@ -1,0 +1,12 @@
+.container {
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+.favorite-icon {
+  color: red; /* Cambia el color a rojo cuando el cursor está sobre el ícono */
+}
+
+.favorite-icon:hover {
+  color: gray; /* Cambia el color a rojo cuando el cursor está sobre el ícono */
+}

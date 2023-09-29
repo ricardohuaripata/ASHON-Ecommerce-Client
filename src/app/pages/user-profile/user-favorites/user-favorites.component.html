@@ -1,0 +1,41 @@
+<div *ngIf="contentLoaded; " class="container">
+    <h2 class="mb-4 text-center">MIS FAVORITOS</h2>
+
+    <div class="row row-cols-1 row-cols-md-5 g-4">
+        <div *ngFor="let product of products" class="col col-6">
+            <div class="card h-100 rounded-0 border-0">
+                <a [routerLink]="['/product', product._id]">
+                    <!-- Enlace a la página del producto -->
+                    <img [src]="product.mainImage" class="card-img-top rounded-0" alt="{{ product.name }}" />
+                </a>
+                <div class="card-body">
+                    <p class="card-title">{{ truncateText(product?.name!, 55) }}</p>
+                    <div class="d-flex justify-content-between">
+                        <p class="card-text">
+                            <span *ngIf="product.priceAfterDiscount < product.price" class="discount-price">
+                                {{ product.priceAfterDiscount | currency }}
+                            </span>
+                            <span *ngIf="product.priceAfterDiscount < product.price" class="original-price">
+                                {{ product.price | currency }}
+                            </span>
+                            <span *ngIf="product.priceAfterDiscount >= product.price">
+                                {{ product.price | currency }}
+                            </span>
+                        </p>
+                        <!-- Icono de corazón para agregar a favoritos -->
+                        <span class="favorite-icon" (click)="removeFromFavorites(product._id)">
+                            <i class="bi bi-heart"></i>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!products || products.length === 0" class="text-center mt-4">
+        <p>No tienes ningún artículo favorito</p>
+        <button class="btn btn-dark-custom btn-block" [routerLink]="'/'">IR A COMPRAR</button>
+    </div>
+
+</div>

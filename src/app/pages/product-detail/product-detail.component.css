@@ -45,3 +45,13 @@ span {
   font-size: 14px;
   font-weight: bold;
 }
+
+.addToCartButton {
+  font-size: 22px;
+  padding: 24px 40px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}

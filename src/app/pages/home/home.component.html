@@ -10,25 +10,32 @@
 
         <ng-template [ngIf]="menProducts.length">
             <div class="row row-cols-1 row-cols-md-4 g-4">
-                <div *ngFor="let product of menProducts" class="col">
+                <div *ngFor="let product of menProducts" class="col col-6">
                     <div class="card h-100 rounded-0 border-0">
                         <a [routerLink]="['/product', product._id]">
                             <!-- Enlace a la página del producto -->
                             <img [src]="product.mainImage" class="card-img-top rounded-0" alt="{{ product.name }}" />
                         </a>
                         <div class="card-body">
-                            <p class="card-title">{{ product.name }}</p>
-                            <p class="card-text">
-                                <span *ngIf="product.priceAfterDiscount < product.price" class="discount-price">
-                                    {{ product.priceAfterDiscount | currency }}
+                            <p class="card-title">{{ truncateText(product?.name!, 55) }}</p>
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text">
+                                    <span *ngIf="product.priceAfterDiscount < product.price" class="discount-price">
+                                        {{ product.priceAfterDiscount | currency }}
+                                    </span>
+                                    <span *ngIf="product.priceAfterDiscount < product.price" class="original-price">
+                                        {{ product.price | currency }}
+                                    </span>
+                                    <span *ngIf="product.priceAfterDiscount >= product.price">
+                                        {{ product.price | currency }}
+                                    </span>
+                                </p>
+                                <!-- Icono de corazón para agregar a favoritos -->
+                                <span class="favorite-icon" (click)="addToFavorites(product._id)">
+                                    <i class="bi bi-heart"></i>
                                 </span>
-                                <span *ngIf="product.priceAfterDiscount < product.price" class="original-price">
-                                    {{ product.price | currency }}
-                                </span>
-                                <span *ngIf="product.priceAfterDiscount >= product.price">
-                                    {{ product.price | currency }}
-                                </span>
-                            </p>
+                            </div>
+    
                         </div>
                     </div>
                 </div>
@@ -40,7 +47,7 @@
             <div class="background-image-women"></div>
 
             <div class="row row-cols-1 row-cols-md-4 g-4">
-                <div *ngFor="let womenProduct of womenProducts" class="col">
+                <div *ngFor="let womenProduct of womenProducts" class="col col-6">
                     <div class="card h-100 rounded-0 border-0">
                         <a [routerLink]="['/product', womenProduct._id]">
                             <!-- Enlace a la página del producto -->
@@ -48,20 +55,25 @@
                                 alt="{{ womenProduct.name }}" />
                         </a>
                         <div class="card-body">
-                            <p class="card-title">{{ womenProduct.name }}</p>
-                            <p class="card-text">
-                                <span *ngIf="womenProduct.priceAfterDiscount < womenProduct.price"
-                                    class="discount-price">
-                                    {{ womenProduct.priceAfterDiscount | currency }}
+                            <p class="card-title">{{ truncateText(womenProduct?.name!, 55) }}</p>
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text">
+                                    <span *ngIf="womenProduct.priceAfterDiscount < womenProduct.price" class="discount-price">
+                                        {{ womenProduct.priceAfterDiscount | currency }}
+                                    </span>
+                                    <span *ngIf="womenProduct.priceAfterDiscount < womenProduct.price" class="original-price">
+                                        {{ womenProduct.price | currency }}
+                                    </span>
+                                    <span *ngIf="womenProduct.priceAfterDiscount >= womenProduct.price">
+                                        {{ womenProduct.price | currency }}
+                                    </span>
+                                </p>
+                                <!-- Icono de corazón para agregar a favoritos -->
+                                <span class="favorite-icon" (click)="addToFavorites(womenProduct._id)">
+                                    <i class="bi bi-heart"></i>
                                 </span>
-                                <span *ngIf="womenProduct.priceAfterDiscount < womenProduct.price"
-                                    class="original-price">
-                                    {{ womenProduct.price | currency }}
-                                </span>
-                                <span *ngIf="womenProduct.priceAfterDiscount >= womenProduct.price">
-                                    {{ womenProduct.price | currency }}
-                                </span>
-                            </p>
+                            </div>
+    
                         </div>
                     </div>
                 </div>

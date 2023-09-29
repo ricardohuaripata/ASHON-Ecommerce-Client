@@ -64,6 +64,8 @@ export class UserProfileComponent implements OnInit {
         cancelButton: 'cancel-button-class',
         confirmButton: 'confirm-button-class',
       },
+      allowOutsideClick: false,
+
     }).then((result) => {
       if (result.isConfirmed) {
         const token = localStorage.getItem('token');
@@ -89,6 +91,8 @@ export class UserProfileComponent implements OnInit {
         cancelButton: 'cancel-button-class',
         confirmButton: 'confirm-button-class',
       },
+      allowOutsideClick: false,
+
     }).then((result) => {
       if (result.isConfirmed) {
         const body = {
@@ -163,6 +167,8 @@ export class UserProfileComponent implements OnInit {
         cancelButton: 'cancel-button-class',
         confirmButton: 'confirm-button-class',
       },
+      allowOutsideClick: false,
+
       preConfirm: () => {
         const currentPassword = (
           document.getElementById('swal-input1') as HTMLInputElement
@@ -192,6 +198,8 @@ export class UserProfileComponent implements OnInit {
         cancelButton: 'cancel-button-class',
         confirmButton: 'confirm-button-class',
       },
+      allowOutsideClick: false,
+
     }).then((result) => {
       if (result.isConfirmed) {
         this._authService.sendVerificationEmail().subscribe({

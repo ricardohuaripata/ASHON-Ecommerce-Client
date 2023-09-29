@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/services/error.service'; // servicio para mostrar mensajes de errores devueltos por el backend
 import Swal from 'sweetalert2';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FavoritesService } from 'src/app/services/favorites.service';
 
 @Component({
   selector: 'app-women-categories',
@@ -20,12 +21,14 @@ export class WomenCategoriesComponent {
     private productService: ProductsService,
     private _errorService: ErrorService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private favoriteService: FavoritesService
   ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.categoryName = params.get('categoryName');
+      document.title = `${this.categoryName?.toUpperCase()} - ASHON`;
 
       // Validar el nombre de la categoría
       if (
@@ -54,5 +57,30 @@ export class WomenCategoriesComponent {
           this.loading = false;
         }
       );
+  }
+
+  addToFavorites(productId: string): void {
+    this.favoriteService.addToFavorites(productId).subscribe({
+      // si la peticion ha tenido exito
+      next: (data: any) => {
+        Swal.fire({
+          icon: 'success',
+          title: data.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      },
+      // si se produce algun error en la peticion
+      error: (event: HttpErrorResponse) => {
+        this._errorService.msgError(event);
+      },
+    });
+  }
+
+  truncateText(text: string, maxLength: number): string {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength - 3) + '...';
+    }
+    return text;
   }
 }

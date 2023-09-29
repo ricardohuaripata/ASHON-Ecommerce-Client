@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Dosis&display=swap");
 :root {
-  --bg-color1: #000000;
+  --bg-color1: #1a1a1a;
   --bg-color2: #ffffff;
   --bg-danger: #c20000;
 }
@@ -22,8 +22,22 @@ body {
   font-size: 1.2rem; /* Ajusta el tamaño de fuente para el texto del precio */
 }
 
+.favorite-icon {
+  cursor: pointer;
+  color: gray;
+}
+
+.favorite-icon:hover {
+  color: red; /* Cambia el color a rojo cuando el cursor está sobre el ícono */
+}
+
 .btn-dark {
   background-color: var(--bg-color1);
+}
+
+.btn-outline-dark {
+  border-color: var(--bg-color1);
+  color: var(--bg-color1);
 }
 
 .btn-outline-dark:hover {
@@ -40,6 +54,15 @@ body {
   border: none !important;
 }
 
+.btn-outline-danger {
+  border-color: var(--bg-danger);
+  color: var(--bg-danger);
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--bg-danger);
+}
+
 .cancel-button-class {
   border: 1px solid var(--bg-color1) !important;
   color: var(--bg-color1) !important;
@@ -51,6 +74,9 @@ body {
   border: 1px solid var(--bg-color1) !important;
   color: var(--bg-color2) !important;
   background-color: var(--bg-color1) !important;
+}
+.swal2-popup .swal2-styled:focus {
+  box-shadow: none !important;
 }
 
 .form-control {
@@ -112,5 +138,4 @@ body {
 .custom-input {
   width: 220px !important; /* Ajusta el ancho según tus necesidades */
   height: 55px !important; /* Cambia la altura según tus necesidades */
-
 }

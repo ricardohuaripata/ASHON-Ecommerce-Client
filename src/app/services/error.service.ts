@@ -15,7 +15,10 @@ export class ErrorService {
         icon: 'error',
         title: 'Oops...',
         text: event.error.message,
-        confirmButtonColor: '#000000',
+        customClass: {
+          confirmButton: 'confirm-button-class',
+        },
+        allowOutsideClick: false,
       });
 
     } else {
@@ -24,7 +27,11 @@ export class ErrorService {
         icon: 'error',
         title: 'Oops...',
         text: 'Algo ha ido mal.',
-        confirmButtonColor: '#000000',
+        customClass: {
+          confirmButton: 'confirm-button-class',
+        },
+        allowOutsideClick: false,
+
       });
     }
   }

@@ -20,25 +20,27 @@ import { UserOrdersComponent } from './pages/user-profile/user-orders/user-order
 import { UserOrderDetailsComponent } from './pages/user-profile/user-orders/user-order-details/user-order-details.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { EmailVerificationComponent } from './pages/email-verification/email-verification.component';
+import { UserFavoritesComponent } from './pages/user-profile/user-favorites/user-favorites.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'account/login', component: LoginComponent },
-  { path: 'account/register', component: RegisterComponent },
-  { path: 'collections/men', component: MenComponent },
-  { path: 'collections/women', component: WomenComponent },
+  { path: '', component: HomeComponent, title: 'HOME - ASHON' },
+  { path: 'account/login', component: LoginComponent, title: 'LOGIN - ASHON' },
+  { path: 'account/register', component: RegisterComponent, title: 'REGISTER - ASHON' },
+  { path: 'collections/men', component: MenComponent, title: 'MEN - ASHON' },
+  { path: 'collections/women', component: WomenComponent, title: 'WOMEN - ASHON' },
   { path: 'collections/men/:categoryName', component: MenCategoriesComponent },
   { path: 'collections/women/:categoryName', component: WomenCategoriesComponent },
   { path: 'product/:id', component: ProductDetailComponent },
   { path: 'search/:searchParam', component: SearchPageComponent },
-  { path: 'verify-email/:token', component: EmailVerificationComponent },
-  { path: 'account', component: UserProfileComponent, canActivate: [AuthGuard] },
-  { path: 'account/my-orders', component: UserOrdersComponent, canActivate: [AuthGuard] },
+  { path: 'verify-email/:token', component: EmailVerificationComponent, title: 'VERIFY EMAIL - ASHON' },
+  { path: 'account', component: UserProfileComponent, title: 'ACCOUNT - ASHON', canActivate: [AuthGuard] },
+  { path: 'account/my-favorites', component: UserFavoritesComponent, title: 'MY FAVORITES - ASHON', canActivate: [AuthGuard] },
+  { path: 'account/my-orders', component: UserOrdersComponent, title: 'MY ORDERS - ASHON', canActivate: [AuthGuard] },
   { path: 'account/my-orders/:orderId', component: UserOrderDetailsComponent, canActivate: [AuthGuard] },
-  { path: 'shopping-cart', component: ShoppingCartComponent, canActivate: [AuthGuard] },
-  { path: 'shopping-cart/checkout', component: PaymentGatewayComponent, canActivate: [AuthGuard] },
+  { path: 'shopping-cart', component: ShoppingCartComponent, title: 'CART - ASHON', canActivate: [AuthGuard] },
+  { path: 'shopping-cart/checkout', component: PaymentGatewayComponent, title: 'CHECKOUT - ASHON', canActivate: [AuthGuard] },
   //controlar pagina no encontrada
-  {path: '**', component: PageNotFoundComponent},
+  {path: '**', component: PageNotFoundComponent, title: '404 PAGE NOT FOUND - ASHON'},
 ];
 
 @NgModule({

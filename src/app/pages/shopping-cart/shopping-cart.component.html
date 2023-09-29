@@ -30,7 +30,7 @@
                   <p class="mb-0">Precio: {{ getProductById(item.product)?.priceAfterDiscount | currency }}</p>
                 </div>
                 <div class="col-md-2 mt-2">
-                    <button class="btn btn-outline-dark btn-sm" (click)="removeFromCart(item.product, item.selectedColor._id, item.selectedSize._id)">Borrar</button>
+                    <button class="btn btn-outline-danger btn-sm" (click)="removeFromCart(item.product, item.selectedColor._id, item.selectedSize._id)"><i class="bi bi-trash"></i> QUITAR</button>
                 </div>
                 
               </div>

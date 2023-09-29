@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/services/error.service'; // servicio para mostrar mensajes de errores devueltos por el backend
+import { FavoritesService } from 'src/app/services/favorites.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -26,7 +27,8 @@ export class ProductDetailComponent implements OnInit {
     private productsService: ProductsService,
     private cartService: CartService,
     private router: Router,
-    private _errorService: ErrorService
+    private _errorService: ErrorService,
+    private favoriteService: FavoritesService
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +41,7 @@ export class ProductDetailComponent implements OnInit {
     this.productsService.getProductById(this.productId).subscribe(
       (data: any) => {
         this.product = data.product;
+        document.title = `${this.product.name?.toUpperCase()} - ASHON`;
         this.loading = false;
       },
       (error) => {
@@ -77,7 +80,29 @@ export class ProductDetailComponent implements OnInit {
         title: 'Por favor, seleccione talla y color',
         showConfirmButton: false,
         timer: 1500,
+        allowOutsideClick: false,
       });
     }
   }
+
+  addToFavorites(productId: string): void {
+    this.favoriteService
+    .addToFavorites(productId)
+    .subscribe({
+      // si la peticion ha tenido exito
+      next: (data: any) => {
+        Swal.fire({
+          icon: 'success',
+          title: data.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      },
+      // si se produce algun error en la peticion
+      error: (event: HttpErrorResponse) => {
+        this._errorService.msgError(event);
+      },
+    });
+  }
+
 }

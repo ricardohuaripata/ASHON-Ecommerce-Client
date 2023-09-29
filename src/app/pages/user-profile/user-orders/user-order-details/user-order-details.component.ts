@@ -56,7 +56,6 @@ export class UserOrderDetailsComponent {
     this.productsService.getProductsByIds(productIds).subscribe(
       (data: any) => {
         this.products = data.products;
-        console.log(this.products);
       },
       (error) => {
         this.products = [];

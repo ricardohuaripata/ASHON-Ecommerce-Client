@@ -48,8 +48,8 @@
       <div class="mb-4">
         <p class="fw-bold">Colores disponibles:</p>
         <div class="color-list d-flex">
-          <div *ngFor="let color of product.colors" class="color-option"
-            [class.selected]="color._id === selectedColor" (click)="selectedColor = color._id!">
+          <div *ngFor="let color of product.colors" class="color-option" [class.selected]="color._id === selectedColor"
+            (click)="selectedColor = color._id!">
             <div class="color-option-cell"
               [style.backgroundColor]="color._id === selectedColor ? '#ccc' : 'transparent'">
               <span class="color-option-text">{{ color.color }}</span>
@@ -59,8 +59,12 @@
       </div>
 
 
-      <div class="mb-4">
-        <button class="btn btn-success" (click)="addToCart()" [disabled]="disableAddToCartButton">Add to cart</button>
+      <div class="mb-4 d-flex align-items-center">
+        <button class="btn btn-dark addToCartButton" (click)="addToCart()" [disabled]="disableAddToCartButton">AÑADIR AL CARRITO</button>
+        <!-- Icono de corazón para agregar a favoritos -->
+        <span class="favorite-icon ms-3" (click)="addToFavorites(product._id)">
+          <i class="favorite-icon ms-2 bi bi-heart fs-3"></i>
+        </span>
       </div>
 
       <!-- Aquí puedes agregar cualquier otra información adicional que desees mostrar -->
