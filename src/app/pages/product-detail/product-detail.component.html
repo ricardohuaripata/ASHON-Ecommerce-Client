@@ -27,7 +27,7 @@
     <div class="col-md-6">
       <h3>{{ product.name }}</h3>
 
-      <div class="rating mb-2" *ngIf="product.ratingsQuantity && product.ratingsQuantity > 0">
+      <div class="rating mb-2" *ngIf="reviews && reviews.length > 0">
         <span *ngFor="let star of getStarArray(product.ratingsAverage!)">
           <i class="bi bi-star-fill large-star"
             [ngClass]="{'text-warning': star === 100, 'text-muted': star === 0}"></i>
@@ -85,7 +85,7 @@
       <hr>
       <h4>Reseñas de otros usuarios</h4>
       <button class="btn btn-outline-dark mb-3" (click)="addReview()">+ Añadir reseña</button>
-      <ng-container *ngIf="product.ratingsQuantity && product.ratingsQuantity > 0; else noReviews">
+      <ng-container *ngIf="reviews && reviews.length > 0; else noReviews">
         <div *ngFor="let review of reviews" class="mb-3">
           <div class="rating">
             <span *ngFor="let star of getStarArray(review.rating)">
@@ -94,6 +94,8 @@
           </div>
           <p>{{ review.review }}</p>
           <small>Publicado en {{ review.updatedAt | date }}&nbsp;&nbsp;&nbsp;**Compra verificada**</small>
+          <br>
+          <small>Última vez editado en {{ review.updatedAt | date }} </small>
         </div>
       </ng-container>
       <ng-template #noReviews>

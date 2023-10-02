@@ -1,0 +1,19 @@
+.container {
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+.edit-icon,
+.delete-icon {
+  font-size: 16px; /* Tamaño de fuente más pequeño */
+  margin-right: 10px; /* Margen entre los iconos */
+  cursor: pointer; /* Apariencia de clickeable */
+}
+
+.edit-icon:hover {
+  color: #0070e7; /* Color de enlace al pasar el mouse (puedes personalizarlo) */
+}
+
+.delete-icon:hover {
+  color: var(--bg-danger);
+}

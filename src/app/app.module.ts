@@ -28,6 +28,7 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { EmailVerificationComponent } from './pages/email-verification/email-verification.component';
 import { CookieConsentComponent } from './cookie-consent/cookie-consent.component';
 import { UserFavoritesComponent } from './pages/user-profile/user-favorites/user-favorites.component';
+import { UserReviewsComponent } from './pages/user-profile/user-reviews/user-reviews.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { UserFavoritesComponent } from './pages/user-profile/user-favorites/user
     EmailVerificationComponent,
     CookieConsentComponent,
     UserFavoritesComponent,
+    UserReviewsComponent,
   ],
   imports: [
     BrowserModule,

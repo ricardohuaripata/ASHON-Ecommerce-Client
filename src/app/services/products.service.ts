@@ -69,4 +69,24 @@ export class ProductsService {
     const body = { review, rating };
     return this.http.post(this.serverUrl + this.apiUrl + id + '/reviews', body);
   }
+
+  deleteProductReview(productId: string, reviewId: string): Observable<any> {
+    return this.http.delete(
+      this.serverUrl + this.apiUrl + productId + '/reviews/' + reviewId
+    );
+  }
+
+  updateProductReview(
+    productId: string,
+    reviewId: string,
+    review: string,
+    rating: number
+  ): Observable<any> {
+    const body = { review, rating };
+
+    return this.http.patch(
+      this.serverUrl + this.apiUrl + productId + '/reviews/' + reviewId,
+      body
+    );
+  }
 }

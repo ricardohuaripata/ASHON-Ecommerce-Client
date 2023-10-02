@@ -34,4 +34,9 @@ export class UserService {
       { headers }
     );
   }
+
+  getUserReviews(id: string): Observable<any> {
+    return this.http.get(this.serverUrl + this.apiUrl + '/' + id + '/reviews');
+  }
+
 }

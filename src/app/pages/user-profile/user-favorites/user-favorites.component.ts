@@ -69,20 +69,11 @@ export class UserFavoritesComponent {
       allowOutsideClick: false,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.favoriteService.removeFromFavorites(productId).subscribe(
-          (data: any) => {
-            this.favoriteService.getFavoritesList().subscribe(
-              (data: any) => {
-                this.favoriteList = data.favorite.products;
-                this.getProducts(this.favoriteList);
-              },
-              (error) => {
-                this.favoriteList = [];
-              }
-            );
-          },
-          (error) => {}
-        );
+        this.favoriteService
+          .removeFromFavorites(productId)
+          .subscribe((data: any) => {
+            location.reload();
+          });
       }
     });
   }

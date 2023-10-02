@@ -21,6 +21,7 @@ import { UserOrderDetailsComponent } from './pages/user-profile/user-orders/user
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { EmailVerificationComponent } from './pages/email-verification/email-verification.component';
 import { UserFavoritesComponent } from './pages/user-profile/user-favorites/user-favorites.component';
+import { UserReviewsComponent } from './pages/user-profile/user-reviews/user-reviews.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, title: 'HOME - ASHON' },
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'verify-email/:token', component: EmailVerificationComponent, title: 'VERIFY EMAIL - ASHON' },
   { path: 'account', component: UserProfileComponent, title: 'ACCOUNT - ASHON', canActivate: [AuthGuard] },
   { path: 'account/my-favorites', component: UserFavoritesComponent, title: 'MY FAVORITES - ASHON', canActivate: [AuthGuard] },
+  { path: 'account/my-reviews', component: UserReviewsComponent, title: 'MY REVIEWS - ASHON', canActivate: [AuthGuard] },
   { path: 'account/my-orders', component: UserOrdersComponent, title: 'MY ORDERS - ASHON', canActivate: [AuthGuard] },
   { path: 'account/my-orders/:orderId', component: UserOrderDetailsComponent, canActivate: [AuthGuard] },
   { path: 'shopping-cart', component: ShoppingCartComponent, title: 'CART - ASHON', canActivate: [AuthGuard] },

@@ -45,9 +45,6 @@ export class UserProfileComponent implements OnInit {
           address: this.userDetails!.address,
           phone: this.userDetails!.phone,
         });
-      },
-      (error) => {
-        console.error(error);
       }
     );
   }

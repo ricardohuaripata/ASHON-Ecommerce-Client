@@ -1,0 +1,54 @@
+<div *ngIf="contentLoaded" class="container">
+    <h2 class="mb-4 text-center">MIS RESEÑAS</h2>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4 rounded-0 border-0">
+                <div class="card-body">
+                    <div *ngFor="let review of reviews" class="mb-4">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <a [routerLink]="['/product', review.product]">
+                                    <img [src]="getProductById(review.product)?.mainImage" alt="Product Image"
+                                        class="img-thumbnail border-0 rounded-0" width="100" height="100">
+                                </a>
+                            </div>
+                            <div class="col-md-10">
+                                <p class="mt-0 mb-1">{{ getProductById(review.product)?.name }}</p>
+                                <div class="rating">
+                                    <span *ngFor="let star of getStarArray(review.rating)">
+                                        <i class="bi bi-star-fill"
+                                            [ngClass]="{'text-warning': star === 100, 'text-muted': star === 0}"></i>
+                                    </span>
+                                </div>
+                                <p>{{ review.review }}</p>
+                                <small>Publicado en {{ review.createdAt | date }} </small>
+                                <br>
+                                <small>Última vez editado en {{ review.updatedAt | date }} </small>
+                                <span class="edit-delete-icons ms-2">
+                                    <i class="bi bi-pencil edit-icon" (click)="editReview(review.product, review._id)"></i>
+                                    <i class="bi bi-trash delete-icon" (click)="deleteReview(review.product, review._id)"></i>
+                                  </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card rounded-0 border-0">
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-dark-custom btn-block" [routerLink]="'/account'">VOLVER A MI
+                            CUENTA</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
