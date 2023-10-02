@@ -136,6 +136,16 @@ body {
 }
 
 .custom-input {
-  width: 220px !important; /* Ajusta el ancho según tus necesidades */
-  height: 55px !important; /* Cambia la altura según tus necesidades */
+  width: 220px !important;
+  height: 55px !important;
+}
+
+.custom-large-input {
+  width: 97% !important;
+  height: 55px !important;
+}
+
+.custom-textarea-input {
+  width: 97% !important;
+  height: 200px !important;
 }

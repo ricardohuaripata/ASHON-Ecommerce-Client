@@ -55,3 +55,11 @@ span {
   justify-content: center;
 
 }
+
+.product-price {
+  font-size: x-large;
+}
+
+.large-star {
+  font-size: 28px; /* Elige el tamaño deseado */
+}

@@ -25,13 +25,26 @@
     </div>
 
     <div class="col-md-6">
-      <h3 class="mb-3">{{ product.name }}</h3>
-      <pre class="mb-3">{{ product.description }}</pre>
+      <h3>{{ product.name }}</h3>
 
-      <p class="mb-2">Precio: <span [class.original-price]="product.priceAfterDiscount < product.price">{{ product.price
+      <div class="rating mb-2" *ngIf="product.ratingsQuantity && product.ratingsQuantity > 0">
+        <span *ngFor="let star of getStarArray(product.ratingsAverage!)">
+          <i class="bi bi-star-fill large-star"
+            [ngClass]="{'text-warning': star === 100, 'text-muted': star === 0}"></i>
+        </span>
+        <small class="ms-2">
+          {{ product.ratingsQuantity }} reseñas
+        </small>
+
+      </div>
+
+      <pre>{{ product.description }}</pre>
+
+      <p class="mb-2">Precio: <span class="product-price"
+          [class.original-price]="product.priceAfterDiscount < product.price">{{ product.price
           | currency }}</span></p>
       <p *ngIf="product.priceAfterDiscount < product.price" class="mb-2">Precio con descuento: <span
-          class="discount-price">{{ product.priceAfterDiscount | currency }}</span></p>
+          class="product-price discount-price">{{ product.priceAfterDiscount | currency }}</span></p>
 
       <div class="mb-4">
         <p class="fw-bold">Tallas disponibles:</p>
@@ -60,14 +73,36 @@
 
 
       <div class="mb-4 d-flex align-items-center">
-        <button class="btn btn-dark addToCartButton" (click)="addToCart()" [disabled]="disableAddToCartButton">AÑADIR AL CARRITO</button>
+        <button class="btn btn-dark addToCartButton" (click)="addToCart()" [disabled]="disableAddToCartButton">AÑADIR AL
+          CARRITO</button>
         <!-- Icono de corazón para agregar a favoritos -->
         <span class="favorite-icon ms-3" (click)="addToFavorites(product._id)">
           <i class="favorite-icon ms-2 bi bi-heart fs-3"></i>
         </span>
       </div>
-
-      <!-- Aquí puedes agregar cualquier otra información adicional que desees mostrar -->
     </div>
+    <div class="mb-2">
+      <hr>
+      <h4>Reseñas de otros usuarios</h4>
+      <button class="btn btn-outline-dark mb-3" (click)="addReview()">+ Añadir reseña</button>
+      <ng-container *ngIf="product.ratingsQuantity && product.ratingsQuantity > 0; else noReviews">
+        <div *ngFor="let review of reviews" class="mb-3">
+          <div class="rating">
+            <span *ngFor="let star of getStarArray(review.rating)">
+              <i class="bi bi-star-fill" [ngClass]="{'text-warning': star === 100, 'text-muted': star === 0}"></i>
+            </span>
+          </div>
+          <p>{{ review.review }}</p>
+          <small>Publicado en {{ review.updatedAt | date }}&nbsp;&nbsp;&nbsp;**Compra verificada**</small>
+        </div>
+      </ng-container>
+      <ng-template #noReviews>
+        <div>
+          <p>Todavía no hay reseñas publicadas</p>
+        </div>
+      </ng-template>
+      
+    </div>
+
   </div>
 </div>

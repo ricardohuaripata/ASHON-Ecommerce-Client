@@ -65,7 +65,6 @@ export class UserProfileComponent implements OnInit {
         confirmButton: 'confirm-button-class',
       },
       allowOutsideClick: false,
-
     }).then((result) => {
       if (result.isConfirmed) {
         const token = localStorage.getItem('token');
@@ -92,7 +91,6 @@ export class UserProfileComponent implements OnInit {
         confirmButton: 'confirm-button-class',
       },
       allowOutsideClick: false,
-
     }).then((result) => {
       if (result.isConfirmed) {
         const body = {
@@ -159,7 +157,6 @@ export class UserProfileComponent implements OnInit {
         '<input id="swal-input1" class="form-control my-1 mx-auto custom-input" placeholder="Contraseña actual" type="password">' +
         '<input id="swal-input2" class="form-control my-1 mx-auto custom-input" placeholder="Nueva contraseña" type="password">' +
         '<input id="swal-input3" class="form-control my-1 mx-auto custom-input" placeholder="Confirmar contraseña" type="password">',
-      focusConfirm: false,
       showCancelButton: true,
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar',
@@ -180,10 +177,12 @@ export class UserProfileComponent implements OnInit {
           document.getElementById('swal-input3') as HTMLInputElement
         ).value;
 
-        // Aquí puedes realizar validaciones adicionales si es necesario
-
-        // Llama a la función para cambiar la contraseña con los datos ingresados
-        this.changePassword(currentPassword, newPassword, confirmNewPassword);
+        if (!currentPassword || !newPassword || !confirmNewPassword) {
+          Swal.showValidationMessage('Por favor, rellena todos los campos.');
+        } else {
+          // Llama a la función para cambiar la contraseña con los datos ingresados
+          this.changePassword(currentPassword, newPassword, confirmNewPassword);
+        }
       },
     });
   }
@@ -199,7 +198,6 @@ export class UserProfileComponent implements OnInit {
         confirmButton: 'confirm-button-class',
       },
       allowOutsideClick: false,
-
     }).then((result) => {
       if (result.isConfirmed) {
         this._authService.sendVerificationEmail().subscribe({

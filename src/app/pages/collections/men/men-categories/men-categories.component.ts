@@ -72,9 +72,10 @@ export class MenCategoriesComponent {
       next: (data: any) => {
         Swal.fire({
           icon: 'success',
-          title: data.message,
+          title: 'Añadido a tu lista de favoritos',
           showConfirmButton: false,
           timer: 1500,
+          allowOutsideClick: false,
         });
       },
       // si se produce algun error en la peticion

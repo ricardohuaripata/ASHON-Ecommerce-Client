@@ -23,30 +23,50 @@ export class ProductsService {
   }
 
   getAllProducts(): Observable<any> {
-    const params = new HttpParams().set('select', 'name, description, price, priceAfterDiscount, mainImage');
-    return this.http.get<any>(this.serverUrl + this.apiUrl, { params }); 
+    const params = new HttpParams().set(
+      'select',
+      'name, description, price, priceAfterDiscount, mainImage'
+    );
+    return this.http.get<any>(this.serverUrl + this.apiUrl, { params });
   }
 
   getCollectionByGenre(genre: string): Observable<any> {
-    return this.http.get<any>(this.serverUrl + this.apiUrl + "genre/" + genre);  
+    return this.http.get<any>(this.serverUrl + this.apiUrl + 'genre/' + genre);
   }
 
-  getCollectionByGenreAndCategory(genre: string, categoryName: string): Observable<any> {
-    return this.http.get<any>(this.serverUrl + this.apiUrl + "genre/" + genre + "/" + categoryName);  
+  getCollectionByGenreAndCategory(
+    genre: string,
+    categoryName: string
+  ): Observable<any> {
+    return this.http.get<any>(
+      this.serverUrl + this.apiUrl + 'genre/' + genre + '/' + categoryName
+    );
   }
 
   getProductById(productId: string): Observable<any> {
-    return this.http.get<any>(this.serverUrl + this.apiUrl + productId);  
+    return this.http.get<any>(this.serverUrl + this.apiUrl + productId);
   }
 
   getProductsByIds(productIds: string[]): Observable<any> {
     const body = { productIds };
-    return this.http.post<any>(this.serverUrl + this.apiUrl + "ids", body);
+    return this.http.post<any>(this.serverUrl + this.apiUrl + 'ids', body);
   }
 
   getProductsBySearch(searchParam: string): Observable<any> {
     const body = { searchParam };
-    return this.http.post<any>(this.serverUrl + this.apiUrl + "search", body);
+    return this.http.post<any>(this.serverUrl + this.apiUrl + 'search', body);
   }
 
+  getProductReviews(id: string): Observable<any> {
+    return this.http.get(this.serverUrl + this.apiUrl + id + '/reviews');
+  }
+
+  addProductReview(
+    id: string,
+    review: string,
+    rating: number
+  ): Observable<any> {
+    const body = { review, rating };
+    return this.http.post(this.serverUrl + this.apiUrl + id + '/reviews', body);
+  }
 }
