@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
+  showPassword: boolean = false; // Variable para alternar entre mostrar y ocultar la contraseña
+  showConfirmPassword: boolean = false; // Variable para alternar entre mostrar y ocultar la contraseña
 
   constructor(
     private fb: FormBuilder,
@@ -64,27 +66,45 @@ export class RegisterComponent implements OnInit {
       error: (event: HttpErrorResponse) => {
         Swal.close();
 
-        if (event.error.error.errors.email) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Email no válido',
-            confirmButtonColor: '#000000',
-          });
-        } else if (event.error.error.errors.password) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'La contraseña debe tener más de 8 caracteres y contener letras, números y símbolos.',
-            confirmButtonColor: '#000000',
-          });
-        } else if (event.error.error.errors.passwordConfirmation) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'La contraseña y la contraseña de confirmación deben ser iguales.',
-            confirmButtonColor: '#000000',
-          });
+        if (event.error.error && event.error.error.errors) {
+          switch (true) {
+            case !!event.error.error.errors.email:
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Email no válido',
+                customClass: {
+                  confirmButton: 'confirm-button-class',
+                },
+                allowOutsideClick: false,
+              });
+              break;
+            case !!event.error.error.errors.password:
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'La contraseña debe tener más de 8 caracteres y contener letras, números y símbolos.',
+                customClass: {
+                  confirmButton: 'confirm-button-class',
+                },
+                allowOutsideClick: false,
+              });
+              break;
+            case !!event.error.error.errors.passwordConfirmation:
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'La contraseña de confirmación no coincide con la contraseña.',
+                customClass: {
+                  confirmButton: 'confirm-button-class',
+                },
+                allowOutsideClick: false,
+              });
+              break;
+            default:
+              this._errorService.msgError(event);
+              break;
+          }
         } else {
           this._errorService.msgError(event);
         }
@@ -100,5 +120,13 @@ export class RegisterComponent implements OnInit {
         Swal.showLoading();
       },
     });
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
+  toggleConfirmPasswordVisibility() {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 }

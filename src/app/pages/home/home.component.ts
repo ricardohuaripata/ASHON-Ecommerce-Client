@@ -15,12 +15,12 @@ export class HomeComponent implements OnInit {
   menProducts: Product[] = [];
   womenProducts: Product[] = [];
   contentLoaded: boolean = false;
+  isAddingToFavorites = false;
 
   constructor(
     private productService: ProductsService,
     private _errorService: ErrorService,
-    private favoriteService: FavoritesService,
-
+    private favoriteService: FavoritesService
   ) {}
 
   ngOnInit(): void {
@@ -44,22 +44,28 @@ export class HomeComponent implements OnInit {
     }, 1000);
   }
   addToFavorites(productId: string): void {
-    this.favoriteService
-    .addToFavorites(productId)
-    .subscribe({
+    if (this.isAddingToFavorites) {
+      return;
+    }
+
+    this.isAddingToFavorites = true;
+
+    this.favoriteService.addToFavorites(productId).subscribe({
       // si la peticion ha tenido exito
       next: (data: any) => {
         Swal.fire({
           icon: 'success',
-          title: 'Añadido a tu lista de favoritos',
+          text: 'Añadido a tu lista de favoritos',
           showConfirmButton: false,
           timer: 1500,
           allowOutsideClick: false,
         });
+        this.isAddingToFavorites = false;
       },
       // si se produce algun error en la peticion
       error: (event: HttpErrorResponse) => {
         this._errorService.msgError(event);
+        this.isAddingToFavorites = false;
       },
     });
   }

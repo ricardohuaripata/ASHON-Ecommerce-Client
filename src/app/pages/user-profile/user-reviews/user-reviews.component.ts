@@ -17,7 +17,7 @@ export class UserReviewsComponent {
   reviews: any[] = [];
   products: Product[] = [];
   productIds: string[] = []; // Array para almacenar los IDs de los productos de las reseñas
-  contentLoaded: boolean = false;
+  loading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,22 +28,26 @@ export class UserReviewsComponent {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.userService.getUserByAuthToken().subscribe((data: any) => {
       this.userId = data.user._id;
 
-      this.userService.getUserReviews(this.userId).subscribe((data: any) => {
-        this.reviews = data.reviews;
+      this.userService.getUserReviews(this.userId).subscribe(
+        (data: any) => {
+          this.reviews = data.reviews;
 
-        // Extraer los IDs de los productos de las reseñas
-        this.productIds = this.reviews.map((review) => review.product);
+          // Extraer los IDs de los productos de las reseñas
+          this.productIds = this.reviews.map((review) => review.product);
 
-        // Llamar a una función para obtener la información detallada de los productos
-        this.getProductsDetails();
-      });
+          // Llamar a una función para obtener la información detallada de los productos
+          this.getProductsDetails();
+        },
+        (error) => {
+          this.loading = false;
+        }
+      );
+
     });
-    setTimeout(() => {
-      this.contentLoaded = true;
-    }, 1500);
   }
 
   getProductsDetails() {
@@ -51,6 +55,7 @@ export class UserReviewsComponent {
       .getProductsByIds(this.productIds)
       .subscribe((data: any) => {
         this.products = data.products;
+        this.loading = false;
       });
   }
 

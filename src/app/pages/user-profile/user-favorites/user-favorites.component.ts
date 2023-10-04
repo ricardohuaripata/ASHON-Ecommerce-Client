@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class UserFavoritesComponent {
   favoriteList: string[] = [];
   products: Product[] = [];
-  contentLoaded: boolean = false;
+  loading: boolean = false;
 
   constructor(
     private favoriteService: FavoritesService,
@@ -22,28 +22,35 @@ export class UserFavoritesComponent {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.favoriteService.getFavoritesList().subscribe(
       (data: any) => {
         this.favoriteList = data.favorite.products;
-        this.getProducts(this.favoriteList);
+        if(this.favoriteList && this.favoriteList.length > 0) {
+          this.getProducts(this.favoriteList);
+        } else {
+          this.loading = false;
+
+        }
       },
       (error) => {
         this.favoriteList = [];
       }
     );
-    // Simulación de tiempo de carga
-    setTimeout(() => {
-      this.contentLoaded = true;
-    }, 1000);
+
   }
 
   getProducts(favoriteList: string[]): void {
     this.productsService.getProductsByIds(favoriteList).subscribe(
       (data: any) => {
         this.products = data.products;
+        this.loading = false;
+
       },
       (error) => {
         this.products = [];
+        this.loading = false;
+
       }
     );
   }
@@ -57,7 +64,7 @@ export class UserFavoritesComponent {
 
   removeFromFavorites(productId: string): void {
     Swal.fire({
-      title: '¿Desea eliminar este artículo de favoritos?',
+      title: '¿Deseas eliminar este artículo de favoritos?',
       focusConfirm: false,
       showCancelButton: true,
       confirmButtonText: 'Si',

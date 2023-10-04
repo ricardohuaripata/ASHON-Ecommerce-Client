@@ -1,85 +1,94 @@
 <div *ngIf="contentLoaded" class="container">
-    <h2 class="mb-4 text-center">CARRITO</h2>
-  
-    <div *ngIf="loading" class="text-center">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
-  
-    <div *ngIf="!loading && cart && cart.items.length > 0" class="row">
-      <div class="col-md-8">
-        <div class="card mb-4 rounded-0 border-0">
-          <div class="card-body">
-            <div *ngFor="let item of cart.items" class="mb-4">
-              <div class="row">
-                <div class="col-md-2">
-                  <a [routerLink]="['/product', item.product]">
-                  <img [src]="getProductById(item.product)?.mainImage" alt="Product Image" class="img-thumbnail border-0 rounded-0" width="100" height="100">
-                </a>
-                </div>
-                <div class="col-md-8">
-                  <p class="mt-0">{{ getProductById(item.product)?.name }}</p>
-                  <p class="mb-0">Talla: {{ item.selectedSize.size }}</p>
-                  <p class="mb-0">Color: {{ item.selectedColor.color }}</p>
-                  <p class="mb-0">Cantidad: 
-                    <button class="btn btn-sm btn-light" (click)="decreaseQuantity(item.product, item.selectedColor._id, item.selectedSize._id)"><i class="bi bi-dash-lg"></i></button>
-                    {{ item.totalProductQuantity }}
-                    <button class="btn btn-sm btn-light" (click)="increaseQuantity(item.product, item.selectedColor._id, item.selectedSize._id)"><i class="bi bi-plus-lg"></i></button>
-                  </p>                  
-                  <p class="mb-0">Precio: {{ getProductById(item.product)?.priceAfterDiscount | currency }}</p>
-                </div>
-                <div class="col-md-2 mt-2">
-                    <button class="btn btn-outline-danger btn-sm" (click)="removeFromCart(item.product, item.selectedColor._id, item.selectedSize._id)"><i class="bi bi-trash"></i> QUITAR</button>
-                </div>
-                
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-md-4">
-        <div class="card rounded-0 border-0">
-          <div class="card-body">
-            <div class="d-grid gap-2">
-                <button class="btn btn-danger-custom btn-block" (click)="clearCart()"><i class="bi bi-trash"></i> VACIAR CARRITO</button>
-            </div>
-          </div>
-        </div>
-        <div class="card rounded-0 border-0">
-          <div class="card-body">
-            <div class="d-grid gap-2">
-                <button class="btn btn-dark-custom btn-block" [routerLink]="'/'">SEGUIR COMPRANDO</button>
-            </div>
-          </div>
-        </div>
-        <div class="card rounded-0 mt-5">
-          <div class="card-body">
-            <h5 class="card-title">Resumen del pedido</h5>
-            <hr>
-            <p>Total: <span class="total-price">{{ cart.totalPrice | currency }}</span></p>
-            <div class="d-grid gap-2">
-                <button class="btn btn-dark-custom btn-block" [routerLink]="'/shopping-cart/checkout'">REALIZAR PAGO</button>
-            </div>
-          </div>
-        </div>
-        <div class="card rounded-0 mt-5">
-          <div class="card-body">
-            <h5 class="card-title">Código de descuento</h5>
-            <hr>
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Aplicar código de descuento" [(ngModel)]="discountCode">
-                <button type="submit" class="btn btn-dark-custom" (click)="applyDiscount()">APLICAR</button>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="!loading && (!cart || cart.items.length === 0)" class="text-center">
-      <p>Tu carrito parece vacío</p>
-      <button class="btn btn-dark-custom btn-block" [routerLink]="'/'">SEGUIR COMPRANDO</button>
+  <h2 class="mb-4 text-center">CARRITO</h2>
 
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
   </div>
-  
+
+  <div *ngIf="!loading && cart && cart.items.length > 0" class="row">
+    <div class="col-md-8">
+      <div class="card mb-4 rounded-0 border-0">
+        <div class="card-body">
+          <div *ngFor="let item of cart.items" class="mb-4">
+            <div class="row">
+              <div class="col-md-2">
+                <a [routerLink]="['/product', item.product]">
+                  <img [src]="getProductById(item.product)?.mainImage" alt="Product Image"
+                    class="img-thumbnail border-0 rounded-0" width="100" height="100">
+                </a>
+              </div>
+              <div class="col-md-8">
+                <p class="mt-0">{{ getProductById(item.product)?.name }}</p>
+                <p class="mb-0">Talla: {{ item.selectedSize.size }}</p>
+                <p class="mb-0">Color: {{ item.selectedColor.color }}</p>
+                <p class="mb-0">Cantidad:
+                  <button class="btn btn-sm btn-light"
+                    (click)="decreaseQuantity(item.product, item.selectedColor._id, item.selectedSize._id)"><i
+                      class="bi bi-dash-lg"></i></button>
+                  {{ item.totalProductQuantity }}
+                  <button class="btn btn-sm btn-light"
+                    (click)="increaseQuantity(item.product, item.selectedColor._id, item.selectedSize._id)"><i
+                      class="bi bi-plus-lg"></i></button>
+                </p>
+                <p class="mb-0">Precio: {{ getProductById(item.product)?.priceAfterDiscount | currency }}</p>
+              </div>
+              <div class="col-md-2 mt-2">
+                <button class="btn btn-outline-danger btn-sm"
+                  (click)="removeFromCart(item.product, item.selectedColor._id, item.selectedSize._id)"><i
+                    class="bi bi-trash"></i> QUITAR</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card rounded-0 border-0">
+        <div class="card-body">
+          <div class="d-grid gap-2">
+            <button class="btn btn-danger-custom btn-block" (click)="clearCart()"><i class="bi bi-trash"></i> VACIAR
+              CARRITO</button>
+          </div>
+        </div>
+      </div>
+      <div class="card rounded-0 border-0">
+        <div class="card-body">
+          <div class="d-grid gap-2">
+            <button class="btn btn-dark-custom btn-block" [routerLink]="'/'">SEGUIR COMPRANDO</button>
+          </div>
+        </div>
+      </div>
+      <div class="card rounded-0 mt-5">
+        <div class="card-body">
+          <h5 class="card-title">Resumen del pedido</h5>
+          <hr>
+          <p>Total: <span class="total-price">{{ cart.totalPrice | currency }}</span></p>
+          <div class="d-grid gap-2">
+            <button class="btn btn-dark-custom btn-block" [routerLink]="'/shopping-cart/checkout'">REALIZAR
+              PAGO</button>
+          </div>
+        </div>
+      </div>
+      <div class="card rounded-0 mt-5">
+        <div class="card-body">
+          <h5 class="card-title">Código de descuento</h5>
+          <hr>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Aplicar código de descuento"
+              [(ngModel)]="discountCode">
+            <button type="submit" class="btn btn-dark-custom" (click)="applyDiscount()">APLICAR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!loading && (!cart || cart.items.length === 0)" class="text-center">
+    <p>Tu carrito parece vacío</p>
+    <button class="btn btn-dark-custom btn-block" [routerLink]="'/'">SEGUIR COMPRANDO</button>
+
+  </div>
+</div>

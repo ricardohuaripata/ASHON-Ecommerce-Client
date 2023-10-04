@@ -19,7 +19,7 @@
                         <div class="card-body">
                             <p class="card-title">{{ truncateText(product?.name!, 55) }}</p>
                             <div class="d-flex justify-content-between">
-                                <p class="card-text">
+                                <p class="card-text mt-0 mb-0">
                                     <span *ngIf="product.priceAfterDiscount < product.price" class="discount-price">
                                         {{ product.priceAfterDiscount | currency }}
                                     </span>
@@ -57,7 +57,7 @@
                         <div class="card-body">
                             <p class="card-title">{{ truncateText(womenProduct?.name!, 55) }}</p>
                             <div class="d-flex justify-content-between">
-                                <p class="card-text">
+                                <p class="card-text mt-0 mb-0">
                                     <span *ngIf="womenProduct.priceAfterDiscount < womenProduct.price" class="discount-price">
                                         {{ womenProduct.priceAfterDiscount | currency }}
                                     </span>

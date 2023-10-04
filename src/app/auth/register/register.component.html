@@ -16,13 +16,26 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">*Contraseña:</label>
-                <input formControlName="password" type="password" class="form-control">
+                <input formControlName="password" [type]="showPassword ? 'text' : 'password'" class="form-control">
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="checkbox" (click)="togglePasswordVisibility()">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Mostrar contraseña
+                    </label>
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label">*Repetir contraseña:</label>
-                <input formControlName="passwordConfirmation" type="password" class="form-control">
+                <input formControlName="passwordConfirmation" [type]="showConfirmPassword ? 'text' : 'password'"
+                    class="form-control">
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="checkbox" (click)="toggleConfirmPasswordVisibility()">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Mostrar contraseña
+                    </label>
+                </div>
             </div>
-            
+
             <div class="d-grid gap-2">
                 <button type="submit" [disabled]="form.invalid" class="btn btn-dark">REGISTRARME</button>
             </div>

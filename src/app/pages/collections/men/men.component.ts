@@ -14,6 +14,7 @@ import { FavoritesService } from 'src/app/services/favorites.service';
 export class MenComponent {
   products: Product[] = [];
   loading: boolean = false;
+  isAddingToFavorites = false;
 
   constructor(
     private productService: ProductsService,
@@ -36,6 +37,13 @@ export class MenComponent {
   }
 
   addToFavorites(productId: string): void {
+
+    if (this.isAddingToFavorites) {
+      return;
+    }
+  
+    this.isAddingToFavorites = true;
+
     this.favoriteService
     .addToFavorites(productId)
     .subscribe({
@@ -43,15 +51,19 @@ export class MenComponent {
       next: (data: any) => {
         Swal.fire({
           icon: 'success',
-          title: 'Añadido a tu lista de favoritos',
+          text: 'Añadido a tu lista de favoritos',
           showConfirmButton: false,
           timer: 1500,
           allowOutsideClick: false,
         });
+        this.isAddingToFavorites = false;
+
       },
       // si se produce algun error en la peticion
       error: (event: HttpErrorResponse) => {
         this._errorService.msgError(event);
+        this.isAddingToFavorites = false;
+
       },
     });
   }

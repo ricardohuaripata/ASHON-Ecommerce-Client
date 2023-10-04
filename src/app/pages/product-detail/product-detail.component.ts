@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/services/error.service'; // servicio para mostrar mensajes de errores devueltos por el backend
 import { FavoritesService } from 'src/app/services/favorites.service';
+import { Cart } from 'src/app/interfaces/cart';
+declare const bootstrap: any; // Declarar Bootstrap globalmente
 
 @Component({
   selector: 'app-product-detail',
@@ -18,10 +20,15 @@ export class ProductDetailComponent implements OnInit {
   productId!: string;
   product!: Product;
   loading: boolean = false;
+  cartLoading: boolean = false;
   selectedSize: string = '';
   selectedColor: string = '';
   disableAddToCartButton = false;
   reviews: any[] = [];
+  cart: Cart | null = null;
+  products: Product[] = [];
+  isAddingToFavorites = false;
+
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService,
@@ -69,13 +76,11 @@ export class ProductDetailComponent implements OnInit {
         .subscribe({
           // si la peticion ha tenido exito
           next: (data: any) => {
-            Swal.fire({
-              icon: 'success',
-              title: data.message,
-              showConfirmButton: false,
-              timer: 1500,
-            });
+            const cartSidebar = document.getElementById('cartSidebar');
+            const bsOffcanvas = new bootstrap.Offcanvas(cartSidebar);
+            bsOffcanvas.show();
 
+            this.getCart();
             this.disableAddToCartButton = false;
           },
           // si se produce algun error en la peticion
@@ -86,7 +91,7 @@ export class ProductDetailComponent implements OnInit {
     } else {
       Swal.fire({
         icon: 'error',
-        title: 'Por favor, seleccione talla y color',
+        title: 'Por favor, selecciona talla y color',
         showConfirmButton: false,
         timer: 1500,
         allowOutsideClick: false,
@@ -95,20 +100,28 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToFavorites(productId: string): void {
+    if (this.isAddingToFavorites) {
+      return;
+    }
+
+    this.isAddingToFavorites = true;
+
     this.favoriteService.addToFavorites(productId).subscribe({
       // si la peticion ha tenido exito
       next: (data: any) => {
         Swal.fire({
           icon: 'success',
-          title: 'Añadido a tu lista de favoritos.',
+          text: 'Añadido a tu lista de favoritos',
           showConfirmButton: false,
           timer: 1500,
           allowOutsideClick: false,
         });
+        this.isAddingToFavorites = false;
       },
       // si se produce algun error en la peticion
       error: (event: HttpErrorResponse) => {
         this._errorService.msgError(event);
+        this.isAddingToFavorites = false;
       },
     });
   }
@@ -180,7 +193,7 @@ export class ProductDetailComponent implements OnInit {
               next: (data: any) => {
                 Swal.fire({
                   icon: 'success',
-                  title: '¡Gracias! Tu reseña ha sido publicada.',
+                  text: 'Tu reseña ha sido publicada',
                   showConfirmButton: false,
                   timer: 1500,
                   allowOutsideClick: false,
@@ -199,5 +212,38 @@ export class ProductDetailComponent implements OnInit {
         }
       },
     });
+  }
+
+  getCart(): void {
+    this.cartLoading = true;
+    this.cartService.getCart().subscribe(
+      (data: any) => {
+        this.cart = data.cart;
+        if (this.cart && this.cart.items.length > 0) {
+          this.getProducts();
+        }
+      },
+      (error) => {
+        this.cart = null;
+      }
+    );
+  }
+
+  getProducts(): void {
+    const productIds = this.cart?.items.map((item) => item.product) || [];
+    this.productsService.getProductsByIds(productIds).subscribe(
+      (data: any) => {
+        this.products = data.products;
+        this.cartLoading = false;
+      },
+      (error) => {
+        this.products = [];
+        this.cartLoading = false;
+      }
+    );
+  }
+
+  getProductById(productId: string): Product | undefined {
+    return this.products.find((product) => product._id === productId);
   }
 }

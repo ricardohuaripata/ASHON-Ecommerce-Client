@@ -51,7 +51,8 @@
         <div class="size-list d-flex">
           <div *ngFor="let size of product.sizes" class="size-option" [class.selected]="size._id === selectedSize"
             (click)="selectedSize = size._id!">
-            <div class="size-option-cell" [style.backgroundColor]="size._id === selectedSize ? '#ccc' : 'transparent'">
+            <div class="size-option-cell"
+              [style.backgroundColor]="size._id === selectedSize ? '#e4e4e4' : 'transparent'">
               <span class="size-option-text">{{ size.size }}</span>
             </div>
           </div>
@@ -64,7 +65,7 @@
           <div *ngFor="let color of product.colors" class="color-option" [class.selected]="color._id === selectedColor"
             (click)="selectedColor = color._id!">
             <div class="color-option-cell"
-              [style.backgroundColor]="color._id === selectedColor ? '#ccc' : 'transparent'">
+              [style.backgroundColor]="color._id === selectedColor ? '#e4e4e4' : 'transparent'">
               <span class="color-option-text">{{ color.color }}</span>
             </div>
           </div>
@@ -103,8 +104,73 @@
           <p>Todavía no hay reseñas publicadas</p>
         </div>
       </ng-template>
-      
+
     </div>
 
+  </div>
+  <div id="cartSidebar" class="offcanvas offcanvas-end" tabindex="-1">
+    <div class="offcanvas-header">
+      <h3 class="offcanvas-title">En el carrito</h3>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <hr class="mt-0 mb-0">
+    <div class="offcanvas-body">
+      <!-- Aquí mostrar los productos en el carrito -->
+      <div *ngIf="cartLoading" class="text-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!cartLoading && cart && cart.items.length > 0" class="row">
+        <div class="col-md-12">
+          <div class="card mb-4 rounded-0 border-0">
+            <div class="card-body">
+              <div *ngFor="let item of cart.items" class="mb-4">
+                <div class="row">
+                  <div class="col-md-4">
+                    <a [routerLink]="['/product', item.product]">
+                      <img [src]="getProductById(item.product)?.mainImage" alt="Product Image"
+                        class="img-thumbnail border-0 rounded-0" width="100" height="100">
+                    </a>
+                  </div>
+                  <div class="col-md-8">
+                    <p class="mt-0">{{ getProductById(item.product)?.name }}</p>
+                    <small class="mb-0">Talla: {{ item.selectedSize.size }}</small>
+                    <br>
+                    <small class="mb-0">Color: {{ item.selectedColor.color }}</small>
+                    <br>
+                    <small class="mb-0">Cantidad:
+
+                      {{ item.totalProductQuantity }}
+
+                    </small>
+                    <br>
+                    <small class="mb-0">Precio: {{ getProductById(item.product)?.priceAfterDiscount | currency
+                      }}</small>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+
+          <div class="card rounded-0 border-0">
+            <div class="card-body">
+              <div class="d-grid gap-2">
+                  <button class="btn btn-dark-custom btn-block" [routerLink]="'/shopping-cart'">VER CARRITO</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
   </div>
 </div>

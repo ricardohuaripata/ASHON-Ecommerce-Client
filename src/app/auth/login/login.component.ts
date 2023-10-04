@@ -13,6 +13,7 @@ import { ErrorService } from 'src/app/services/error.service'; // servicio para 
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  showPassword: boolean = false; // Variable para alternar entre mostrar y ocultar la contraseña
 
   constructor(
     private fb: FormBuilder,
@@ -46,4 +47,9 @@ export class LoginComponent implements OnInit {
       },
     });
   }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
 }
