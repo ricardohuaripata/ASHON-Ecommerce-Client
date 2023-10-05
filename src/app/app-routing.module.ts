@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'account/my-favorites', component: UserFavoritesComponent, title: 'MY FAVORITES - ASHON', canActivate: [AuthGuard] },
   { path: 'account/my-reviews', component: UserReviewsComponent, title: 'MY REVIEWS - ASHON', canActivate: [AuthGuard] },
   { path: 'account/my-orders', component: UserOrdersComponent, title: 'MY ORDERS - ASHON', canActivate: [AuthGuard] },
-  { path: 'account/my-orders/:orderId', component: UserOrderDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'account/my-orders/:orderId', component: UserOrderDetailsComponent, title: 'MY ORDERS - ASHON', canActivate: [AuthGuard] },
   { path: 'shopping-cart', component: ShoppingCartComponent, title: 'CART - ASHON', canActivate: [AuthGuard] },
   { path: 'shopping-cart/checkout', component: PaymentGatewayComponent, title: 'CHECKOUT - ASHON', canActivate: [AuthGuard] },
   //controlar pagina no encontrada

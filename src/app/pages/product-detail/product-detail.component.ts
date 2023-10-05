@@ -50,7 +50,6 @@ export class ProductDetailComponent implements OnInit {
         this.product = data.product;
         document.title = `${this.product.name?.toUpperCase()} - ASHON`;
         this.getProductReviews();
-        this.loading = false;
       },
       (error) => {
         this.loading = false;
@@ -60,11 +59,15 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getProductReviews(): void {
-    this.productsService
-      .getProductReviews(this.productId)
-      .subscribe((data: any) => {
+    this.productsService.getProductReviews(this.productId).subscribe(
+      (data: any) => {
         this.reviews = data.reviews;
-      });
+        this.loading = false;
+      },
+      (error) => {
+        this.loading = false;
+      }
+    );
   }
 
   addToCart(): void {
@@ -221,10 +224,13 @@ export class ProductDetailComponent implements OnInit {
         this.cart = data.cart;
         if (this.cart && this.cart.items.length > 0) {
           this.getProducts();
+        } else {
+          this.cartLoading = false;
         }
       },
       (error) => {
         this.cart = null;
+        this.cartLoading = false;
       }
     );
   }

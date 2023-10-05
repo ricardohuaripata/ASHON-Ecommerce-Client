@@ -18,7 +18,6 @@ export class ShoppingCartComponent implements OnInit {
   cart: Cart | null = null;
   products: Product[] = [];
   loading: boolean = false;
-  contentLoaded: boolean = false;
   discountCode: string = '';
 
   constructor(
@@ -31,10 +30,6 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCart();
-    // Simulación de tiempo de carga
-    setTimeout(() => {
-      this.contentLoaded = true;
-    }, 1500);
   }
 
   getCart(): void {
@@ -44,8 +39,9 @@ export class ShoppingCartComponent implements OnInit {
         this.cart = data.cart;
         if (this.cart && this.cart.items.length > 0) {
           this.getProducts();
+        } else {
+          this.loading = false;
         }
-        this.loading = false;
       },
       (error) => {
         this.cart = null;
@@ -59,9 +55,11 @@ export class ShoppingCartComponent implements OnInit {
     this.productsService.getProductsByIds(productIds).subscribe(
       (data: any) => {
         this.products = data.products;
+        this.loading = false;
       },
       (error) => {
         this.products = [];
+        this.loading = false;
       }
     );
   }
@@ -85,7 +83,6 @@ export class ShoppingCartComponent implements OnInit {
         confirmButton: 'confirm-button-class',
       },
       allowOutsideClick: false,
-
     }).then((result) => {
       if (result.isConfirmed) {
         if (!this.cart) return;
@@ -118,7 +115,6 @@ export class ShoppingCartComponent implements OnInit {
         confirmButton: 'confirm-button-class',
       },
       allowOutsideClick: false,
-
     }).then((result) => {
       if (result.isConfirmed) {
         if (!this.cart) return;

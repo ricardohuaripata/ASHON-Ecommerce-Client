@@ -116,7 +116,7 @@
     <hr class="mt-0 mb-0">
     <div class="offcanvas-body">
       <!-- Aquí mostrar los productos en el carrito -->
-      <div *ngIf="cartLoading" class="text-center">
+      <div *ngIf="cartLoading" class="text-center mt-4">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
@@ -161,7 +161,7 @@
           <div class="card rounded-0 border-0">
             <div class="card-body">
               <div class="d-grid gap-2">
-                  <button class="btn btn-dark-custom btn-block" [routerLink]="'/shopping-cart'">VER CARRITO</button>
+                  <button class="btn btn-dark-custom btn-block" data-bs-dismiss="offcanvas" [routerLink]="'/shopping-cart'">VER CARRITO</button>
               </div>
             </div>
           </div>

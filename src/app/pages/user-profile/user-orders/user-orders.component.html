@@ -3,7 +3,7 @@
 
     <ul class="list-group" *ngIf="orders && orders.length > 0">
         <li class="list-group-item rounded-0" *ngFor="let order of orders">
-            <h5 class="mt-3 mb-3">Ref #{{ order._id }}</h5>
+            <h5 class="mt-3 mb-3">ID #{{ order._id }}</h5>
             <p [ngClass]="{ 'text-danger': order.status === 'Not Processed',
                     'text-primary': order.status === 'Processing',
                     'text-info': order.status === 'Shipped',
@@ -11,10 +11,11 @@
                     'text-muted': order.status === 'Cancelled' }">
                 <strong>Estado:</strong> {{ order.status }}
             </p>
-            <p><strong>Total pagado:</strong> ${{ order.totalPrice }}</p>
-            <p><strong>Fecha de pedido:</strong> {{ order.createdAt | date }}</p>
-            <p><strong>Dirección de envío:</strong> {{ order.shippingAddress.address }}, {{
-                order.shippingAddress.city }}, {{ order.shippingAddress.country }}</p>
+            <p><strong>Fecha de orden:</strong> {{ order.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}</p>
+            <p><strong>Dirección de envío:</strong> {{ order.shippingAddress.address }} - CP: {{
+                order.shippingAddress.postalCode }} / {{
+                order.shippingAddress.city }} / {{ order.shippingAddress.country }}</p>
+            <p><strong>Total pagado:</strong> {{ order.totalPrice | currency }}</p>
 
             <div class="d-grid gap-2">
                 <a class="btn btn-outline-dark" [routerLink]="['/account/my-orders', order._id]">VER DETALLES</a>
@@ -24,7 +25,8 @@
 
     <div *ngIf="!orders || orders.length === 0" class="text-center">
         <p>No tienes pedidos en tu historial</p>
-        <button class="btn btn-dark-custom btn-block" [routerLink]="'/'">IR A COMPRAR</button>
+        <button class="btn btn-dark-custom btn-block" [routerLink]="'/account'">VOLVER A MI
+            CUENTA</button>
     </div>
 
 </div>

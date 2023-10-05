@@ -34,14 +34,11 @@ export class HomeComponent implements OnInit {
     this.productService.getCollectionByGenre('women').subscribe(
       (data: any) => {
         this.womenProducts = data.products;
+        this.contentLoaded = true;
       },
       (error) => {}
     );
 
-    // Simulación de tiempo de carga
-    setTimeout(() => {
-      this.contentLoaded = true;
-    }, 1000);
   }
   addToFavorites(productId: string): void {
     if (this.isAddingToFavorites) {

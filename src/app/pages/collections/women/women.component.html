@@ -15,7 +15,7 @@
                         <img [src]="product.mainImage" class="card-img-top rounded-0" alt="{{ product.name }}" />
                     </a>
                     <div class="card-body">
-                        <p class="card-title">{{  truncateText(product?.name!, 55) }}</p>
+                        <p class="card-title">{{  truncateText(product?.name!, 46) }}</p>
                         <div class="d-flex justify-content-between">
                             <p class="card-text mt-0 mb-0">
                                 <span *ngIf="product.priceAfterDiscount < product.price" class="discount-price">

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorService } from 'src/app/services/error.service'; // servicio para mostrar mensajes de errores devueltos por el backend
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -52,4 +53,52 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
+  forgotPassword() {
+    Swal.fire({
+      title: '¿Has olvidado tu contraseña?',
+      text: 'Introduce tu dirección de correo electrónico y te enviaremos un correo electrónico para restablecerla',
+      input: 'email',
+      showCancelButton: true,
+      showLoaderOnConfirm: true,
+      confirmButtonText: 'Enviar',
+      cancelButtonText: 'Cancelar',
+      allowOutsideClick: false,
+      customClass: {
+        cancelButton: 'cancel-button-class',
+        confirmButton: 'confirm-button-class',
+      },
+      preConfirm: (email) => {
+        this.mostrarEsperaCarga();
+        this._authService.forgotPassword(email).subscribe({
+          // si la peticion ha tenido exito
+          next: (data: any) => {
+            Swal.close();
+            Swal.fire({
+              icon: 'success',
+              title: '¡Enviado! Ahora por favor, revisa tu correo',
+              customClass: {
+                confirmButton: 'confirm-button-class',
+              },
+              allowOutsideClick: false,
+            });
+          },
+          // si se produce algun error en la peticion
+          error: (event: HttpErrorResponse) => {
+            Swal.close();
+            this._errorService.msgError(event);
+          },
+        });
+      },
+    });
+  }
+
+  mostrarEsperaCarga() {
+    Swal.fire({
+      title: 'Loading...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+  }
 }

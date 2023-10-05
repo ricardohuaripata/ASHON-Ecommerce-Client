@@ -33,10 +33,6 @@ export class UserOrderDetailsComponent {
       this.orderId = params.get('orderId');
       this.getOrder(this.orderId!);
     });
-
-    setTimeout(() => {
-      this.contentLoaded = true;
-    }, 1500);
   }
 
   getOrder(orderId: string): void {
@@ -56,9 +52,11 @@ export class UserOrderDetailsComponent {
     this.productsService.getProductsByIds(productIds).subscribe(
       (data: any) => {
         this.products = data.products;
+        this.contentLoaded = true;
       },
       (error) => {
         this.products = [];
+        this.contentLoaded = true;
       }
     );
   }

@@ -36,17 +36,21 @@ export class UserReviewsComponent {
         (data: any) => {
           this.reviews = data.reviews;
 
-          // Extraer los IDs de los productos de las reseñas
-          this.productIds = this.reviews.map((review) => review.product);
+          if (this.reviews && this.reviews.length > 0) {
+            // Extraer los IDs de los productos de las reseñas
+            this.productIds = this.reviews.map((review) => review.product);
 
-          // Llamar a una función para obtener la información detallada de los productos
-          this.getProductsDetails();
+            // Llamar a una función para obtener la información detallada de los productos
+            this.getProductsDetails();
+            
+          } else {
+            this.loading = false;
+          }
         },
         (error) => {
           this.loading = false;
         }
       );
-
     });
   }
 

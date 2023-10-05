@@ -23,7 +23,10 @@
         </form>
         <hr>
         <div class="d-grid gap-2">
-            <p class="text-center mb-2">¿No tienes cuenta? <a href="/account/register">Regístrate aquí</a></p>
+            <button class="btn btn-outline-dark" (click)="forgotPassword()">HE OLVIDADO MI CONTRASEÑA</button>
+        </div>
+        <div class="d-grid gap-2">
+            <button class="btn btn-outline-dark" [routerLink]="'/account/register'">CREAR UNA CUENTA</button>
         </div>
     </div>
 </div>

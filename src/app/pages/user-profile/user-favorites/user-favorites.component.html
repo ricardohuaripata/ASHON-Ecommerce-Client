@@ -7,7 +7,7 @@
     </div>
 
     <ng-template #productList>
-        <div *ngIf="products && products.length > 0" class="row row-cols-1 row-cols-md-5 g-4">
+        <div *ngIf="products && products.length > 0" class="row row-cols-1 row-cols-md-4 g-4">
             <div *ngFor="let product of products" class="col col-6">
                 <div class="card h-100 rounded-0 border-0">
                     <a [routerLink]="['/product', product._id]">
@@ -40,7 +40,8 @@
         </div>
         <div *ngIf="!products || products.length === 0" class="text-center">
             <p>No tienes ningún artículo favorito</p>
-            <button class="btn btn-dark-custom btn-block" [routerLink]="'/'">VOLVER A LA PÁGINA PRINCIPAL</button>
+            <button class="btn btn-dark-custom btn-block" [routerLink]="'/account'">VOLVER A MI
+                CUENTA</button>
         </div>
     </ng-template>
 

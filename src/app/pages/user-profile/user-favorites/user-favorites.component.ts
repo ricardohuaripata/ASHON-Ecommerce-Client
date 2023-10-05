@@ -35,6 +35,8 @@ export class UserFavoritesComponent {
       },
       (error) => {
         this.favoriteList = [];
+        this.loading = false;
+
       }
     );
 

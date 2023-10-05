@@ -17,27 +17,22 @@ export class UserOrdersComponent implements OnInit {
 
   constructor(
     private _errorService: ErrorService,
-    private _orderService: OrderService,
+    private _orderService: OrderService
   ) {}
   ngOnInit(): void {
     this.getOrders();
-    // Simulación de tiempo de carga
-    setTimeout(() => {
-      this.contentLoaded = true;
-    }, 1000);
   }
 
   getOrders(): void {
     this._orderService.getUserOrders().subscribe({
       next: (data: any) => {
         this.orders = data.orders;
-
+        this.contentLoaded = true;
       },
       error: (event: HttpErrorResponse) => {
         this.orders = [];
-        this._errorService.msgError(event);
+        this.contentLoaded = true;
       },
     });
   }
-
 }

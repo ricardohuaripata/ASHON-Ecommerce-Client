@@ -26,7 +26,6 @@ export class SearchPageComponent {
   ) {}
 
   ngOnInit(): void {
-    this.loading = true;
 
     this.route.paramMap.subscribe((params) => {
       this.searchParam = params.get('searchParam') ?? '';

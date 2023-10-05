@@ -83,7 +83,7 @@ export class RegisterComponent implements OnInit {
               Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'La contraseña debe tener más de 8 caracteres y contener letras, números y símbolos.',
+                text: 'La contraseña debe tener más de 8 caracteres y contener letras, números y símbolos',
                 customClass: {
                   confirmButton: 'confirm-button-class',
                 },
@@ -94,7 +94,7 @@ export class RegisterComponent implements OnInit {
               Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'La contraseña de confirmación no coincide con la contraseña.',
+                text: 'La contraseña de confirmación no coincide con la contraseña',
                 customClass: {
                   confirmButton: 'confirm-button-class',
                 },

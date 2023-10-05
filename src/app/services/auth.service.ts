@@ -94,4 +94,13 @@ export class AuthService {
     );
   }
 
+  forgotPassword(email: string): Observable<string> {
+    const body = {
+      email,
+    };
+    return this.http.post<string>(
+      this.serverUrl + this.apiUrl + '/forgot-password',
+      body
+    );
+  }
 }

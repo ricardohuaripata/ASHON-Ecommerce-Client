@@ -35,18 +35,16 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getUserByAuthToken().subscribe(
-      (data: any) => {
-        this.userDetails = data.user;
-        this.form.patchValue({
-          name: this.userDetails!.name,
-          username: this.userDetails!.username,
-          email: this.userDetails!.email,
-          address: this.userDetails!.address,
-          phone: this.userDetails!.phone,
-        });
-      }
-    );
+    this.userService.getUserByAuthToken().subscribe((data: any) => {
+      this.userDetails = data.user;
+      this.form.patchValue({
+        name: this.userDetails!.name,
+        username: this.userDetails!.username,
+        email: this.userDetails!.email,
+        address: this.userDetails!.address,
+        phone: this.userDetails!.phone,
+      });
+    });
   }
 
   logout() {
@@ -103,15 +101,40 @@ export class UserProfileComponent implements OnInit {
           next: (data: any) => {
             Swal.fire({
               icon: 'success',
-              title: data.message,
+              title: 'Tu información ha sido actualizada',
               showConfirmButton: false,
               allowOutsideClick: false,
               timer: 1500,
             });
+
+            // Recarga la página después de 1.5 segundos
+            setTimeout(() => {
+              location.reload();
+            }, 1500);
           },
           // si se produce algun error en la peticion
           error: (event: HttpErrorResponse) => {
-            this._errorService.msgError(event);
+            if (event.error.error && event.error.error.errors) {
+              switch (true) {
+                case !!event.error.error.errors.email:
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Email no válido',
+                    customClass: {
+                      confirmButton: 'confirm-button-class',
+                    },
+                    allowOutsideClick: false,
+                  });
+                  break;
+
+                default:
+                  this._errorService.msgError(event);
+                  break;
+              }
+            } else {
+              this._errorService.msgError(event);
+            }
           },
         });
       }
@@ -142,7 +165,27 @@ export class UserProfileComponent implements OnInit {
       },
       // si se produce algun error en la peticion
       error: (event: HttpErrorResponse) => {
-        this._errorService.msgError(event);
+        if (event.error.error && event.error.error.errors) {
+          switch (true) {
+            case !!event.error.error.errors.password:
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'La contraseña debe tener más de 8 caracteres y contener letras, números y símbolos',
+                customClass: {
+                  confirmButton: 'confirm-button-class',
+                },
+                allowOutsideClick: false,
+              });
+              break;
+
+            default:
+              this._errorService.msgError(event);
+              break;
+          }
+        } else {
+          this._errorService.msgError(event);
+        }
       },
     });
   }
@@ -151,9 +194,11 @@ export class UserProfileComponent implements OnInit {
     Swal.fire({
       title: 'Cambiar contraseña',
       html:
+      '<form>' +
         '<input id="swal-input1" class="form-control my-1 mx-auto custom-input" placeholder="Contraseña actual" type="password">' +
         '<input id="swal-input2" class="form-control my-1 mx-auto custom-input" placeholder="Nueva contraseña" type="password">' +
-        '<input id="swal-input3" class="form-control my-1 mx-auto custom-input" placeholder="Confirmar contraseña" type="password">',
+        '<input id="swal-input3" class="form-control my-1 mx-auto custom-input" placeholder="Confirmar contraseña" type="password">' +
+        '</form>',
       showCancelButton: true,
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar',
@@ -197,12 +242,14 @@ export class UserProfileComponent implements OnInit {
       allowOutsideClick: false,
     }).then((result) => {
       if (result.isConfirmed) {
+        this.mostrarEsperaCarga();
         this._authService.sendVerificationEmail().subscribe({
           // si la peticion ha tenido exito
           next: (data: any) => {
+            Swal.close();
             Swal.fire({
               icon: 'success',
-              title: data.message,
+              title: "¡Enviado! Revisa tu correo",
               showConfirmButton: false,
               allowOutsideClick: false,
               timer: 1500,
@@ -210,10 +257,23 @@ export class UserProfileComponent implements OnInit {
           },
           // si se produce algun error en la peticion
           error: (event: HttpErrorResponse) => {
+            Swal.close();
             this._errorService.msgError(event);
           },
         });
       }
     });
   }
+
+  mostrarEsperaCarga() {
+    Swal.fire({
+      title: 'Loading...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+  }
+
+
 }
