@@ -149,3 +149,21 @@ body {
   width: 97% !important;
   height: 200px !important;
 }
+
+.form-check-input {
+  border-radius: 0 !important;
+}
+
+.form-check-input:checked {
+  background-color: var(--bg-color1);
+  border: none;
+}
+
+.form-check-input:not(:checked) {
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+}
+
+.form-check-input:focus {
+  box-shadow: none;
+}

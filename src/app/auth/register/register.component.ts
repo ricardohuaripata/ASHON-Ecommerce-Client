@@ -1,6 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorService } from 'src/app/services/error.service'; // servicio para mostrar mensajes de errores devueltos por el backend
@@ -15,6 +20,7 @@ export class RegisterComponent implements OnInit {
   form: FormGroup;
   showPassword: boolean = false; // Variable para alternar entre mostrar y ocultar la contraseña
   showConfirmPassword: boolean = false; // Variable para alternar entre mostrar y ocultar la contraseña
+  submited: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -26,14 +32,46 @@ export class RegisterComponent implements OnInit {
       // validar campo requerido
       name: ['', Validators.required],
       username: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      passwordConfirmation: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          this.passwordFormatValidator,
+        ],
+      ],
+      passwordConfirmation: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          this.passwordFormatValidator,
+        ],
+      ],
     });
   }
   ngOnInit(): void {}
 
+  passwordFormatValidator(
+    control: AbstractControl
+  ): { [key: string]: boolean } | null {
+    const password = control.value;
+
+    // Verifica si la contraseña contiene al menos una letra y un número
+    if (!/[a-zA-Z]/.test(password) || !/\d/.test(password)) {
+      return { invalidPasswordFormat: true };
+    }
+
+    return null;
+  }
+
   registerUser() {
+    this.submited = true;
+    if (this.form.invalid) {
+      return;
+    }
+
     this.form.disable;
     this.mostrarEsperaCarga();
 
