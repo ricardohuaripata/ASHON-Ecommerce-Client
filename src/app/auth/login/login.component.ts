@@ -47,6 +47,15 @@ export class LoginComponent implements OnInit {
     this._authService.login(user).subscribe({
       // si la peticion ha tenido exito
       next: (data: any) => {
+        const userData = {
+          name: data.user.name,
+          username: data.user.username,
+          email: data.user.email,
+          isEmailVerified: data.user.isEmailVerified,
+          address: data.user.address,
+          phone: data.user.phone
+        };
+        localStorage.setItem('userData', JSON.stringify(userData));
         localStorage.setItem('token', data.tokens.refreshToken);
         this.router.navigate(['/']);
       },

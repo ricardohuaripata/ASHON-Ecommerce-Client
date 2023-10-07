@@ -38,16 +38,14 @@
 
       </div>
 
-      <pre>{{ product.description }}</pre>
 
-      <p class="mb-2">Precio: <span class="product-price"
+      <p class="mt-2"><span *ngIf="product.priceAfterDiscount < product.price" class="product-price discount-price">{{ product.priceAfterDiscount | currency }}</span>&nbsp;&nbsp;<span class="product-price"
           [class.original-price]="product.priceAfterDiscount < product.price">{{ product.price
           | currency }}</span></p>
-      <p *ngIf="product.priceAfterDiscount < product.price" class="mb-2">Precio con descuento: <span
-          class="product-price discount-price">{{ product.priceAfterDiscount | currency }}</span></p>
+
 
       <div class="mb-4">
-        <p class="fw-bold">Tallas disponibles:</p>
+        <p class="fw-bold mb-2">Tallas disponibles:</p>
         <div class="size-list d-flex">
           <div *ngFor="let size of product.sizes" class="size-option" [class.selected]="size._id === selectedSize"
             (click)="selectedSize = size._id!">
@@ -60,7 +58,7 @@
       </div>
 
       <div class="mb-4">
-        <p class="fw-bold">Colores disponibles:</p>
+        <p class="fw-bold mb-2">Colores disponibles:</p>
         <div class="color-list d-flex">
           <div *ngFor="let color of product.colors" class="color-option" [class.selected]="color._id === selectedColor"
             (click)="selectedColor = color._id!">
@@ -81,11 +79,15 @@
           <i class="favorite-icon ms-2 bi bi-heart fs-3"></i>
         </span>
       </div>
+
+      <h5>Detalles</h5>
+      <pre>{{ product.description }}</pre>
+
     </div>
     <div class="mb-2">
       <hr>
       <h4>Reseñas de otros usuarios</h4>
-      <button class="btn btn-outline-dark mb-3" (click)="addReview()">+ Añadir reseña</button>
+      <button class="btn btn-outline-dark mb-3" (click)="addReview()">AÑADIR RESEÑA</button>
       <ng-container *ngIf="reviews && reviews.length > 0; else noReviews">
         <div *ngFor="let review of reviews" class="mb-3">
           <div class="rating">

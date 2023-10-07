@@ -42,47 +42,60 @@
 
         <div class="col-md-7 col-lg-8">
           <h4 class="mb-3">Datos de envío</h4>
-          <form [formGroup]="form" (ngSubmit)="submitOrder()" class="needs-validation" id="formulario">
+          <form [formGroup]="form" (ngSubmit)="submitOrder()">
             <div class="row g-3">
 
               <div class="col-12">
-                <label class="form-label">* Dirección de entrega</label>
-                <input type="text" class="form-control" required formControlName="address">
-                <div class="invalid-feedback">
-                  Por favor, introduce la dirección de entrega.
+                <label class="form-label">Dirección de entrega</label>
+                <input type="text" class="form-control" formControlName="address"
+                  [ngClass]="{ 'is-invalid': form.get('address')!.invalid && this.submited }">
+                <div *ngIf="form.get('address')!.hasError('required') && this.submited" class="invalid-feedback">
+                  Este campo es obligatorio
                 </div>
               </div>
 
               <div class="col-md-4">
-                <label class="form-label">* País</label>
-                <input type="text" class="form-control" maxlength="50" required formControlName="city">
-                <div class="invalid-feedback">
-                  Pais requerido.
+                <label class="form-label">País</label>
+                <input type="text" class="form-control" formControlName="country"
+                  [ngClass]="{ 'is-invalid': form.get('country')!.invalid && this.submited }">
+                <div *ngIf="form.get('country')!.hasError('required') && this.submited" class="invalid-feedback">
+                  Este campo es obligatorio
                 </div>
               </div>
 
               <div class="col-md-4">
-                <label class="form-label">* Ciudad</label>
-                <input type="text" class="form-control" maxlength="50" required formControlName="country">
-                <div class="invalid-feedback">
-                  Ciudad requerida.
+                <label class="form-label">Ciudad</label>
+                <input type="text" class="form-control" formControlName="city"
+                  [ngClass]="{ 'is-invalid': form.get('city')!.invalid && this.submited }">
+                <div *ngIf="form.get('city')!.hasError('required') && this.submited" class="invalid-feedback">
+                  Este campo es obligatorio
                 </div>
               </div>
 
               <div class="col-md-4">
-                <label class="form-label">* C. Postal</label>
-                <input type="text" class="form-control" minlength="4" maxlength="10" required
-                  formControlName="postalCode">
-                <div class="invalid-feedback">
-                  C. Postal requerido.
+                <label class="form-label">Código postal</label>
+                <input type="text" class="form-control" formControlName="postalCode"
+                  [ngClass]="{ 'is-invalid': form.get('postalCode')!.invalid && this.submited }">
+                <div *ngIf="form.get('postalCode')!.hasError('required') && this.submited" class="invalid-feedback">
+                  Este campo es obligatorio
+                </div>
+                <div
+                  *ngIf="form.get('postalCode')!.hasError('required') == false && form.get('postalCode')!.hasError('invalidPostalCode') && this.submited"
+                  class="invalid-feedback">
+                  El código postal no es válido
                 </div>
               </div>
               <div class="col-md-4">
-                <label class="form-label">* Número de teléfono</label>
-                <input type="text" class="form-control" placeholder="ej: +34669090660" minlength="10" maxlength="15"
-                  required formControlName="phone">
-                <div class="invalid-feedback">
-                  Teléfono requerido.
+                <label class="form-label">Número de teléfono</label>
+                <input type="text" placeholder="+34622549749" class="form-control" formControlName="phone"
+                  [ngClass]="{ 'is-invalid': form.get('phone')!.invalid && this.submited }">
+                <div *ngIf="form.get('phone')!.hasError('required') && this.submited" class="invalid-feedback">
+                  Este campo es obligatorio
+                </div>
+                <div
+                  *ngIf="form.get('phone')!.hasError('required') == false && form.get('phone')!.hasError('invalidPhoneNumber') && this.submited"
+                  class="invalid-feedback">
+                  El número de teléfono no es válido
                 </div>
               </div>
             </div>
@@ -94,29 +107,47 @@
             <div class="row gy-3">
 
               <div class="col-md-6">
-                <label class="form-label">* Número de tarjeta</label>
-                <input type="text" class="form-control" placeholder="0000 0000 0000 0000" minlength="19" maxlength="19"
-                  required formControlName="cardNumber">
-                <div class="invalid-feedback">
-                  Número de tarjeta requerido
+                <label class="form-label">Número de tarjeta</label>
+                <input type="text" class="form-control" placeholder="0000 0000 0000 0000" formControlName="cardNumber"
+                  [ngClass]="{ 'is-invalid': form.get('cardNumber')!.invalid && this.submited }">
+                <div *ngIf="form.get('cardNumber')!.hasError('required') && this.submited" class="invalid-feedback">
+                  Este campo es obligatorio
+                </div>
+                <div
+                  *ngIf="form.get('cardNumber')!.hasError('required') == false && form.get('cardNumber')!.hasError('invalidCreditCard') && this.submited"
+                  class="invalid-feedback">
+                  El número de tarjeta no es válido
                 </div>
               </div>
 
               <div class="col-md-3">
-                <label class="form-label">* Expiración</label>
-                <input type="text" class="form-control" placeholder="00/00" minlength="5" maxlength="5" required
-                  formControlName="expDate">
-                <div class="invalid-feedback">
-                  Fecha requerida
+                <label class="form-label">Expiración</label>
+                <input type="text" class="form-control" placeholder="00/00" formControlName="expDate"
+                  [ngClass]="{ 'is-invalid': form.get('expDate')!.invalid && this.submited }">
+                <div *ngIf="form.get('expDate')!.hasError('required') && this.submited" class="invalid-feedback">
+                  Este campo es obligatorio
+                </div>
+                <div
+                  *ngIf="form.get('expDate')!.hasError('required') == false && form.get('expDate')!.hasError('invalidExpDate') && this.submited"
+                  class="invalid-feedback">
+                  La fecha de expiración no es válida
+                </div>
+                <div *ngIf="form.get('expDate')!.hasError('expiredExpDate') && this.submited" class="invalid-feedback">
+                  La fecha de expiración está vencida
                 </div>
               </div>
 
               <div class="col-md-3">
-                <label class="form-label">* CVC</label>
-                <input type="text" class="form-control" placeholder="000" minlength="3" maxlength="3" required
-                  formControlName="cvc">
-                <div class="invalid-feedback">
-                  CVC requerido
+                <label class="form-label">CVC</label>
+                <input type="text" class="form-control" placeholder="000" formControlName="cvc"
+                  [ngClass]="{ 'is-invalid': form.get('cvc')!.invalid && this.submited }">
+                <div *ngIf="form.get('cvc')!.hasError('required') && this.submited" class="invalid-feedback">
+                  Este campo es obligatorio
+                </div>
+                <div
+                  *ngIf="form.get('cvc')!.hasError('required') == false && form.get('cvc')!.hasError('invalidCvc') && this.submited"
+                  class="invalid-feedback">
+                  El CVC no es válido
                 </div>
               </div>
             </div>

@@ -202,6 +202,7 @@ export class UserProfileComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar',
+      width: '340px',
       customClass: {
         cancelButton: 'cancel-button-class',
         confirmButton: 'confirm-button-class',
