@@ -103,4 +103,13 @@ export class AuthService {
       body
     );
   }
+
+  resetPassword(token: string, body: any): Observable<string> {
+    const headers = new HttpHeaders().set('Accept-Language', 'es');
+
+    return this.http.post<string>(
+      this.serverUrl + this.apiUrl + '/reset-password?token=' + token,
+      body
+    );
+  }
 }

@@ -32,7 +32,10 @@
                     }}</strong></small>
               </div>
             </li>
-
+            <li class="list-group-item d-flex justify-content-between rounded-0">
+              <span>Envío:</span>
+              {{ 0.00 | currency }}
+            </li>
             <li class="list-group-item d-flex justify-content-between rounded-0">
               <span>Total a pagar:</span>
               <strong>{{ cart.totalPrice | currency }}</strong>

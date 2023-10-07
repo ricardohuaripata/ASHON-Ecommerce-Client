@@ -29,6 +29,7 @@ import { EmailVerificationComponent } from './pages/email-verification/email-ver
 import { CookieConsentComponent } from './cookie-consent/cookie-consent.component';
 import { UserFavoritesComponent } from './pages/user-profile/user-favorites/user-favorites.component';
 import { UserReviewsComponent } from './pages/user-profile/user-reviews/user-reviews.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { UserReviewsComponent } from './pages/user-profile/user-reviews/user-rev
     CookieConsentComponent,
     UserFavoritesComponent,
     UserReviewsComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

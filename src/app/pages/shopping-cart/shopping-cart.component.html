@@ -65,7 +65,8 @@
         <div class="card-body">
           <h5 class="card-title">Resumen del pedido</h5>
           <hr>
-          <p>Total: <span class="total-price">{{ cart.totalPrice | currency }}</span></p>
+          <p class="mb-2">Envío: {{ 0.00 | currency }}</p>
+          <p>Total: {{ cart.totalPrice | currency }}</p>
           <div class="d-grid gap-2">
             <button class="btn btn-dark-custom btn-block" [routerLink]="'/shopping-cart/checkout'">REALIZAR
               PAGO</button>
