@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { OAuthService } from 'angular-oauth2-oidc';
+import { AuthGoogleService } from 'src/app/services/auth-google.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorService } from 'src/app/services/error.service'; // servicio para mostrar mensajes de errores devueltos por el backend
 import Swal from 'sweetalert2';
@@ -26,7 +28,9 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private _authService: AuthService,
     private router: Router,
-    private _errorService: ErrorService
+    private _errorService: ErrorService,
+    private oauthService: OAuthService,
+    private _authGoogleService: AuthGoogleService
   ) {
     this.form = this.fb.group({
       // validar campo requerido
@@ -97,8 +101,17 @@ export class RegisterComponent implements OnInit {
           allowOutsideClick: false,
           timer: 1500,
         });
+        const userData = {
+          name: data.user.name,
+          username: data.user.username,
+          email: data.user.email,
+          isEmailVerified: data.user.isEmailVerified,
+          address: data.user.address,
+          phone: data.user.phone,
+        };
+        localStorage.setItem('userData', JSON.stringify(userData));
         localStorage.setItem('token', data.tokens.refreshToken);
-        this.router.navigate(['/']);
+        this.router.navigate(['/account']);
       },
       // si se produce algun error en la peticion
       error: (event: HttpErrorResponse) => {
@@ -166,5 +179,9 @@ export class RegisterComponent implements OnInit {
 
   toggleConfirmPasswordVisibility() {
     this.showConfirmPassword = !this.showConfirmPassword;
+  }
+
+  loginWithGoogle() {
+    this.oauthService.initLoginFlow();
   }
 }

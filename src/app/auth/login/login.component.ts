@@ -2,7 +2,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { OAuthService } from 'angular-oauth2-oidc';
 import { User } from 'src/app/interfaces/user';
+import { AuthGoogleService } from 'src/app/services/auth-google.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorService } from 'src/app/services/error.service'; // servicio para mostrar mensajes de errores devueltos por el backend
 import Swal from 'sweetalert2';
@@ -21,7 +23,9 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private _authService: AuthService,
     private router: Router,
-    private _errorService: ErrorService
+    private _errorService: ErrorService,
+    private _authGoogleService: AuthGoogleService,
+    private oauthService: OAuthService
   ) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -53,11 +57,11 @@ export class LoginComponent implements OnInit {
           email: data.user.email,
           isEmailVerified: data.user.isEmailVerified,
           address: data.user.address,
-          phone: data.user.phone
+          phone: data.user.phone,
         };
         localStorage.setItem('userData', JSON.stringify(userData));
         localStorage.setItem('token', data.tokens.refreshToken);
-        this.router.navigate(['/']);
+        this.router.navigate(['/account']);
       },
       // si se produce algun error en la peticion
       error: (event: HttpErrorResponse) => {
@@ -139,5 +143,9 @@ export class LoginComponent implements OnInit {
         Swal.showLoading();
       },
     });
+  }
+
+  loginWithGoogle() {
+    this.oauthService.initLoginFlow();
   }
 }

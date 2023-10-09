@@ -28,7 +28,9 @@ export class HomeComponent implements OnInit {
       (data: any) => {
         this.menProducts = data.products;
       },
-      (error) => {}
+      (error) => {
+        this.menProducts = [];
+      }
     );
 
     this.productService.getCollectionByGenre('women').subscribe(
@@ -36,9 +38,10 @@ export class HomeComponent implements OnInit {
         this.womenProducts = data.products;
         this.contentLoaded = true;
       },
-      (error) => {}
+      (error) => {
+        this.womenProducts = [];
+      }
     );
-
   }
   addToFavorites(productId: string): void {
     if (this.isAddingToFavorites) {

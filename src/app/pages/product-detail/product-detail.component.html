@@ -87,7 +87,7 @@
     <div class="mb-2">
       <hr>
       <h4>Reseñas de otros usuarios</h4>
-      <button class="btn btn-outline-dark mb-3" (click)="addReview()">AÑADIR RESEÑA</button>
+      <button class="btn btn-outline-dark mb-3" (click)="addReview()">Añadir reseña</button>
       <ng-container *ngIf="reviews && reviews.length > 0; else noReviews">
         <div *ngFor="let review of reviews" class="mb-3">
           <div class="rating">

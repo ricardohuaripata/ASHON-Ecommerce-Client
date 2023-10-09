@@ -214,10 +214,8 @@ export class PaymentGatewayComponent implements OnInit {
   submitOrder() {
     this.submited = true;
     if (this.form.invalid) {
-      console.log('hola bro');
       return;
     }
-    console.log('hola bro 2');
 
     this.form.disable;
     this.mostrarEsperaCarga();

@@ -30,6 +30,8 @@ import { CookieConsentComponent } from './cookie-consent/cookie-consent.componen
 import { UserFavoritesComponent } from './pages/user-profile/user-favorites/user-favorites.component';
 import { UserReviewsComponent } from './pages/user-profile/user-reviews/user-reviews.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { SocialAuthComponent } from './auth/social-auth/social-auth.component';
 
 @NgModule({
   declarations: [
@@ -55,10 +57,12 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
     UserFavoritesComponent,
     UserReviewsComponent,
     ResetPasswordComponent,
+    SocialAuthComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    OAuthModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
     // modulo necesario para la conexion con el backend

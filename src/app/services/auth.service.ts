@@ -112,4 +112,15 @@ export class AuthService {
       body
     );
   }
+
+  googleAuth(googleAccessToken: string): Observable<string> {
+    const body = {
+      googleAccessToken,
+    };
+    return this.http.post<string>(
+      this.serverUrl + this.apiUrl + '/google-login',
+      body
+    );
+  }
+  
 }

@@ -2,10 +2,10 @@
     <div class="card bg-light text-center rounded-0">
         <div class="card-body">
             <ng-container *ngIf="verificationSuccess">
-                <div class="verification-icon text-success">
+                <div class="verification-icon text-success mt-4">
                     <i class="bi bi-check-circle-fill display-1"></i>
                 </div>
-                <h2 class="mt-4">Email verificado!</h2>
+                <h2 class="mt-4">¡Email verificado!</h2>
                 <p class="my-4">
                     Su email ha sido correctamente verificado.
                 </p>
@@ -14,7 +14,7 @@
                 </div>
             </ng-container>
             <ng-container *ngIf="verificationError">
-                <div class="verification-icon text-danger">
+                <div class="verification-icon text-danger mt-4">
                     <i class="bi bi-x-circle-fill display-1"></i>
                 </div>
                 <h2 class="mt-4">Verificación fallida</h2>

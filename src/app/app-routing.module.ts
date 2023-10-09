@@ -23,10 +23,12 @@ import { EmailVerificationComponent } from './pages/email-verification/email-ver
 import { UserFavoritesComponent } from './pages/user-profile/user-favorites/user-favorites.component';
 import { UserReviewsComponent } from './pages/user-profile/user-reviews/user-reviews.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { SocialAuthComponent } from './auth/social-auth/social-auth.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, title: 'HOME - ASHON' },
   { path: 'account/login', component: LoginComponent, title: 'LOGIN - ASHON' },
+  { path: 'account/social-authentication', component: SocialAuthComponent, title: 'SOCIAL AUTH - ASHON' },
   { path: 'account/register', component: RegisterComponent, title: 'REGISTER - ASHON' },
   { path: 'account/verify-email/:token', component: EmailVerificationComponent, title: 'VERIFY EMAIL - ASHON' },
   { path: 'account/reset-password/:token', component: ResetPasswordComponent, title: 'RESET PASSWORD - ASHON' },
