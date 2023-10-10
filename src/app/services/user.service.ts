@@ -39,4 +39,18 @@ export class UserService {
     return this.http.get(this.serverUrl + this.apiUrl + '/' + id + '/reviews');
   }
 
+  verifyDiscountCode(discountCode: string): Observable<string> {
+    const body = {
+      discountCode,
+    };
+    return this.http.post<string>(this.serverUrl + 'api/discount/verify', body);
+  }
+
+  cancelDiscountCode(): Observable<any> {
+    return this.http.delete<string>(this.serverUrl + 'api/discount/cancel');
+  }
+
+  findDiscountCode(): Observable<any> {
+    return this.http.get<string>(this.serverUrl + 'api/discount/find');
+  }
 }

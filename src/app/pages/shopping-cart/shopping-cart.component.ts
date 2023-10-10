@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/services/error.service'; // servicio para mostrar mensajes de errores devueltos por el backend
 import { Cart } from 'src/app/interfaces/cart';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -19,16 +21,21 @@ export class ShoppingCartComponent implements OnInit {
   products: Product[] = [];
   loading: boolean = false;
   discountCode: string = '';
+  sending: boolean = false;
+  user: User | null = null;
+  discount: number = 0;
 
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService,
     private cartService: CartService,
     private router: Router,
-    private _errorService: ErrorService
+    private _errorService: ErrorService,
+    private _userService: UserService
   ) {}
 
   ngOnInit(): void {
+    this.loadUser();
     this.getCart();
   }
 
@@ -48,6 +55,20 @@ export class ShoppingCartComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  loadUser() {
+    this._userService.getUserByAuthToken().subscribe((data: any) => {
+      this.user = data.user;
+      this._userService.findDiscountCode().subscribe(
+        (data: any) => {
+          this.discount = data.discount;
+        },
+        (error) => {
+          this.discount = 0;
+        }
+      );
+    });
   }
 
   getProducts(): void {
@@ -169,24 +190,66 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   applyDiscount(): void {
-    if (this.discountCode === 'TESTCODE') {
-      Swal.fire({
-        icon: 'success',
-        title: 'Código de descuento aplicado.',
-        showConfirmButton: false,
-        allowOutsideClick: false,
-        timer: 1500,
-      });
-
-      // TODO
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Código de descuento inválido.',
-        showConfirmButton: false,
-        allowOutsideClick: false,
-        timer: 1500,
+    if (this.discountCode) {
+      this.sending = true;
+      this._userService.verifyDiscountCode(this.discountCode).subscribe({
+        next: (data: any) => {
+          Swal.fire({
+            icon: 'success',
+            text: 'Código de descuento aplicado',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            timer: 1500,
+          });
+          this.sending = false;
+          setTimeout(() => {
+            location.reload();
+          }, 1500);
+        },
+        error: (event: HttpErrorResponse) => {
+          Swal.fire({
+            icon: 'error',
+            text: event.error.message,
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            timer: 1500,
+          });
+          this.sending = false;
+        },
       });
     }
+  }
+
+  cancelDiscount() {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+      customClass: {
+        cancelButton: 'cancel-button-class',
+        confirmButton: 'confirm-button-class',
+      },
+      allowOutsideClick: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._userService.cancelDiscountCode().subscribe({
+          next: (data: any) => {
+            this.discount = 0;
+            location.reload();
+          },
+          error: (event: HttpErrorResponse) => {
+            Swal.fire({
+              icon: 'error',
+              text: event.error.message,
+              showConfirmButton: false,
+              allowOutsideClick: false,
+              timer: 1500,
+            });
+          },
+        });
+      }
+    });
   }
 }

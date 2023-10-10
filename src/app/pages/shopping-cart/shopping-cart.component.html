@@ -23,6 +23,7 @@
                 <p class="mt-0">{{ getProductById(item.product)?.name }}</p>
                 <p class="mb-0">Talla: {{ item.selectedSize.size }}</p>
                 <p class="mb-0">Color: {{ item.selectedColor.color }}</p>
+                <p class="mb-0">Precio: {{ getProductById(item.product)?.priceAfterDiscount | currency }}</p>
                 <p class="mb-0">Cantidad:
                   <button class="btn btn-sm btn-light"
                     (click)="decreaseQuantity(item.product, item.selectedColor._id, item.selectedSize._id)"><i
@@ -32,7 +33,6 @@
                     (click)="increaseQuantity(item.product, item.selectedColor._id, item.selectedSize._id)"><i
                       class="bi bi-plus-lg"></i></button>
                 </p>
-                <p class="mb-0">Precio: {{ getProductById(item.product)?.priceAfterDiscount | currency }}</p>
               </div>
               <div class="col-md-2 mt-2">
                 <button class="btn btn-outline-danger btn-sm"
@@ -65,8 +65,10 @@
         <div class="card-body">
           <h5 class="card-title">Resumen del pedido</h5>
           <hr>
-          <p class="mb-2">Envío: {{ 0.00 | currency }}</p>
-          <p>Total: {{ cart.totalPrice | currency }}</p>
+          <p class="mb-2">Subtotal: {{ cart.totalPrice | currency }}</p>
+          <p *ngIf="this.user!.discountCode" class="mb-2">Descuento: -{{ (this.discount / 100) * cart.totalPrice | currency}}</p>
+          <p class="mb-2">Envío: GRATIS</p>
+          <p>Total: {{ cart.totalPrice-((this.discount / 100) * cart.totalPrice) | currency }}</p>
           <div class="d-grid gap-2">
             <button class="btn btn-dark-custom btn-block" [routerLink]="'/shopping-cart/checkout'">REALIZAR
               PAGO</button>
@@ -77,12 +79,22 @@
         <div class="card-body">
           <h5 class="card-title">Código de descuento</h5>
           <hr>
-          <div class="input-group">
+          <div *ngIf="!this.user!.discountCode" class="input-group">
             <input type="text" class="form-control" placeholder="Aplicar código de descuento"
-              [(ngModel)]="discountCode">
-            <button type="submit" class="btn btn-dark-custom" (click)="applyDiscount()">APLICAR</button>
+              [(ngModel)]="this.discountCode">
+            <button type="submit" class="btn btn-dark-custom" [disabled]="sending"
+              (click)="applyDiscount()">APLICAR</button>
+          </div>
+          <div *ngIf="this.user!.discountCode" class="d-grid gap-2">
+            <div class="alert alert-success mb-2 rounded-0" role="alert">
+              ¡Enhorabuena! tienes un código de descuento aplicado del <strong>{{ this.discount }}%</strong> en tu próximo pedido.
+            </div>
+            <div class="d-grid gap-2">
+              <button class="btn btn-dark-custom btn-block" (click)="cancelDiscount()">CANCELAR CODIGO</button>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>

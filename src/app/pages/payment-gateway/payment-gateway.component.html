@@ -33,12 +33,20 @@
               </div>
             </li>
             <li class="list-group-item d-flex justify-content-between rounded-0">
+              <span> Subtotal:</span>
+              {{ cart.totalPrice | currency }}
+            </li>
+            <li *ngIf="this.user!.discountCode" class="list-group-item d-flex justify-content-between rounded-0">
+              <span> Descuento:</span>
+              -{{ (this.discount / 100) * cart.totalPrice | currency}}
+            </li>
+            <li class="list-group-item d-flex justify-content-between rounded-0">
               <span>Envío:</span>
-              {{ 0.00 | currency }}
+              GRATIS
             </li>
             <li class="list-group-item d-flex justify-content-between rounded-0">
               <span>Total a pagar:</span>
-              <strong>{{ cart.totalPrice | currency }}</strong>
+              <strong>{{ cart.totalPrice-((this.discount / 100) * cart.totalPrice) | currency }}</strong>
             </li>
           </ul>
         </div>

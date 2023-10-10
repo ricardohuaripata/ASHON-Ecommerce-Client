@@ -14,6 +14,8 @@ import { Cart } from 'src/app/interfaces/cart';
 import { CartService } from 'src/app/services/cart.service';
 import { Product } from 'src/app/interfaces/product';
 import { ProductsService } from 'src/app/services/products.service';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-payment-gateway',
@@ -26,6 +28,8 @@ export class PaymentGatewayComponent implements OnInit {
   products: Product[] = [];
   contentLoaded: boolean = false;
   submited: boolean = false;
+  user: User | null = null;
+  discount: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -33,7 +37,8 @@ export class PaymentGatewayComponent implements OnInit {
     private _errorService: ErrorService,
     private _orderService: OrderService,
     private cartService: CartService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private _userService: UserService
   ) {
     this.form = this.fb.group({
       address: ['', Validators.required],
@@ -45,6 +50,20 @@ export class PaymentGatewayComponent implements OnInit {
       cardNumber: ['', [Validators.required, this.creditCardValidator]],
       expDate: ['', [Validators.required, this.expDateValidator]],
       cvc: ['', [Validators.required, this.cvcValidator]],
+    });
+  }
+
+  loadUser() {
+    this._userService.getUserByAuthToken().subscribe((data: any) => {
+      this.user = data.user;
+      this._userService.findDiscountCode().subscribe(
+        (data: any) => {
+          this.discount = data.discount;
+        },
+        (error) => {
+          this.discount = 0;
+        }
+      );
     });
   }
 
@@ -155,6 +174,7 @@ export class PaymentGatewayComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadUser();
     this.getCart();
 
     const userDataJSON = localStorage.getItem('userData');
