@@ -1,5 +1,4 @@
 <div class="container">
-    <h2 class="mb-4 text-center">MEN'S COLLECTION</h2>
     <div *ngIf="loading; else productList" class="text-center">
         <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -7,6 +6,7 @@
     </div>
 
     <ng-template #productList>
+        <h2 class="mb-4 text-center">{{ this.genre!.toUpperCase() }}'S COLLECTION</h2>
         <div class="row row-cols-1 row-cols-md-4 g-4">
             <div *ngFor="let product of products" class="col col-6">
                 <div class="card h-100 rounded-0 border-0">

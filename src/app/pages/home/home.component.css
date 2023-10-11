@@ -36,3 +36,12 @@
   background-position: center top;
   height: 600px; /* Ajusta la altura según tus necesidades */
 }
+
+.bigButton {
+  font-size: 20px;
+  padding: 24px 36px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

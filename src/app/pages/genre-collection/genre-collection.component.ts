@@ -5,48 +5,58 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/services/error.service'; // servicio para mostrar mensajes de errores devueltos por el backend
 import Swal from 'sweetalert2';
 import { FavoritesService } from 'src/app/services/favorites.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-men',
-  templateUrl: './men.component.html',
-  styleUrls: ['./men.component.css'],
+  selector: 'app-genre-collection',
+  templateUrl: './genre-collection.component.html',
+  styleUrls: ['./genre-collection.component.css'],
 })
-export class MenComponent {
+export class GenreCollectionComponent {
   products: Product[] = [];
   loading: boolean = false;
   isAddingToFavorites = false;
+  genre!: string | null;
 
   constructor(
     private productService: ProductsService,
     private _errorService: ErrorService,
-    private favoriteService: FavoritesService
+    private favoriteService: FavoritesService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.loading = true;
-    this.productService.getCollectionByGenre('men').subscribe(
-      (data: any) => {
-        this.products = data.products;
-        this.loading = false;
-      },
-      (error) => {
-        this.products = [];
-        this.loading = false;
-      }
-    );
+    this.route.paramMap.subscribe((params) => {
+      this.loading = true;
+
+      this.genre = params.get('genre');
+
+      this.productService.getCollectionByGenre(this.genre!).subscribe(
+        (data: any) => {
+          if (data.products && data.products.length > 0) {
+            document.title = `${this.genre!.toUpperCase()} COLLECTION - ASHON`;
+            this.products = data.products;
+            this.loading = false;
+          } else {
+            this.router.navigate(['/']); // Redirigir al usuario
+          }
+        },
+        (error) => {
+          this.router.navigate(['/']); // Redirigir al usuario
+        }
+      );
+    });
   }
 
   addToFavorites(productId: string): void {
-
     if (this.isAddingToFavorites) {
       return;
     }
-  
+
     this.isAddingToFavorites = true;
 
-    this.favoriteService
-    .addToFavorites(productId)
-    .subscribe({
+    this.favoriteService.addToFavorites(productId).subscribe({
       // si la peticion ha tenido exito
       next: (data: any) => {
         Swal.fire({
@@ -57,13 +67,11 @@ export class MenComponent {
           allowOutsideClick: false,
         });
         this.isAddingToFavorites = false;
-
       },
       // si se produce algun error en la peticion
       error: (event: HttpErrorResponse) => {
         this._errorService.msgError(event);
         this.isAddingToFavorites = false;
-
       },
     });
   }
@@ -74,5 +82,4 @@ export class MenComponent {
     }
     return text;
   }
-
 }

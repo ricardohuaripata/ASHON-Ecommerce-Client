@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productService.getCollectionByGenre('men').subscribe(
+    this.productService.getCollectionByGenre("men").subscribe(
       (data: any) => {
         this.menProducts = data.products;
       },
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
       }
     );
 
-    this.productService.getCollectionByGenre('women').subscribe(
+    this.productService.getCollectionByGenre("women").subscribe(
       (data: any) => {
         this.womenProducts = data.products;
         this.contentLoaded = true;

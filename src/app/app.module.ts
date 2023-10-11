@@ -11,15 +11,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
-import { MenComponent } from './pages/collections/men/men.component';
-import { WomenComponent } from './pages/collections/women/women.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { MenCategoriesComponent } from './pages/collections/men/men-categories/men-categories.component';
-import { WomenCategoriesComponent } from './pages/collections/women/women-categories/women-categories.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { PaymentGatewayComponent } from './pages/payment-gateway/payment-gateway.component';
 import { UserOrdersComponent } from './pages/user-profile/user-orders/user-orders.component';
@@ -32,21 +28,19 @@ import { UserReviewsComponent } from './pages/user-profile/user-reviews/user-rev
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { SocialAuthComponent } from './auth/social-auth/social-auth.component';
+import { GenreCollectionComponent } from './pages/genre-collection/genre-collection.component';
+import { GenreCategoryCollectionComponent } from './pages/genre-category-collection/genre-category-collection.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    MenComponent,
-    WomenComponent,
     NavbarComponent,
     RegisterComponent,
     ProductDetailComponent,
     ShoppingCartComponent,
     PageNotFoundComponent,
-    MenCategoriesComponent,
-    WomenCategoriesComponent,
     UserProfileComponent,
     PaymentGatewayComponent,
     UserOrdersComponent,
@@ -58,6 +52,8 @@ import { SocialAuthComponent } from './auth/social-auth/social-auth.component';
     UserReviewsComponent,
     ResetPasswordComponent,
     SocialAuthComponent,
+    GenreCollectionComponent,
+    GenreCategoryCollectionComponent,
   ],
   imports: [
     BrowserModule,
