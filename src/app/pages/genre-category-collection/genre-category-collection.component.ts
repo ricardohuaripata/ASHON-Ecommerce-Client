@@ -1,25 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 import { Product } from 'src/app/interfaces/product';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { ErrorService } from 'src/app/services/error.service'; // servicio para mostrar mensajes de errores devueltos por el backend
 import Swal from 'sweetalert2';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { CategoriesService } from 'src/app/services/categories.service';
+import { switchMap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-genre-category-collection',
   templateUrl: './genre-category-collection.component.html',
   styleUrls: ['./genre-category-collection.component.css'],
 })
-export class GenreCategoryCollectionComponent {
+export class GenreCategoryCollectionComponent implements OnInit {
   products: Product[] = [];
   loading: boolean = false;
   isAddingToFavorites = false;
   genre!: string | null;
   categoryName!: string | null;
   categoryId!: string | null;
+  metadata: any;
+  selectedLimit: number = 10;
+  page: number = 1;
+  sort: string = '';
+  private routeSubscription!: Subscription;
+  private productsSubscription!: Subscription;
 
   constructor(
     private productService: ProductsService,
@@ -31,27 +39,43 @@ export class GenreCategoryCollectionComponent {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      this.loading = true;
+    this.routeSubscription = this.route.paramMap
+      .pipe(
+        switchMap((params) => {
+          this.loading = true;
+          this.genre = params.get('genre');
+          this.categoryName = params.get('categoryName');
+          return this.route.queryParams;
+        }),
+        switchMap((queryParams) => {
+          this.page = queryParams['page'] || 1;
+          this.selectedLimit = queryParams['limit'] || 10;
+          this.sort = queryParams['sort'] || '';
 
-      this.genre = params.get('genre');
-      this.categoryName = params.get('categoryName');
-
-      this.categoriesService.getCategoryByName(this.categoryName!).subscribe(
+          return this.categoriesService.getCategoryByName(this.categoryName!);
+        })
+      )
+      .subscribe(
         (data: any) => {
           this.categoryId = data.category._id;
 
-          this.productService
-            .getCollectionByGenreAndCategory(this.genre!, this.categoryId!)
+          const customParams = new HttpParams()
+            .set(
+              'filter',
+              `{"genre":"${this.genre}","category":"${this.categoryId}"}`
+            )
+            .set('page', this.page.toString())
+            .set('limit', this.selectedLimit.toString())
+            .set('sort', this.sort);
+
+          this.productsSubscription = this.productService
+            .getProducts(customParams)
             .subscribe(
               (data: any) => {
-                if (data.products && data.products.length > 0) {
-                  document.title = `${this.genre!.toUpperCase()} ${this.categoryName!.toUpperCase()} - ASHON`;
-                  this.products = data.products;
-                  this.loading = false;
-                } else {
-                  this.router.navigate(['/']); // Redirigir al usuario
-                }
+                document.title = `${this.genre!.toUpperCase()}'S ${this.categoryName!.toUpperCase()} - ASHON`;
+                this.products = data.products;
+                this.metadata = data.metadata;
+                this.loading = false;
               },
               (error) => {
                 this.router.navigate(['/']); // Redirigir al usuario
@@ -59,10 +83,19 @@ export class GenreCategoryCollectionComponent {
             );
         },
         (error) => {
-          this.router.navigate(['/']); // Redirigir al usuario
+          this.router.navigate(['/']);
         }
       );
-    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
+
+    if (this.productsSubscription) {
+      this.productsSubscription.unsubscribe();
+    }
   }
 
   truncateText(text: string, maxLength: number): string {
@@ -95,6 +128,37 @@ export class GenreCategoryCollectionComponent {
         this._errorService.msgError(event);
         this.isAddingToFavorites = false;
       },
+    });
+  }
+
+  generatePageArray(totalPages: number): number[] {
+    return Array(totalPages)
+      .fill(0)
+      .map((x, i) => i + 1);
+  }
+  generatePageLink(page: number): string {
+    const currentUrlTree = this.router.createUrlTree([], {
+      relativeTo: this.route,
+      queryParams: { page: page },
+      queryParamsHandling: 'merge',
+    });
+
+    return this.router.serializeUrl(currentUrlTree);
+  }
+
+  onLimitChange() {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { limit: this.selectedLimit },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  sortBy(sort: string) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { sort: sort },
+      queryParamsHandling: 'merge',
     });
   }
 }

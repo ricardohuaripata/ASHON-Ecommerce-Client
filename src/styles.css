@@ -90,7 +90,7 @@ body {
   background-color: var(--bg-color2) !important;
 }
 
-.offcanvas-body .dropdown-item:active {
+.dropdown-item:active {
   background-color: var(--bg-color1);
   color: var(--bg-color2);
 }
@@ -156,10 +156,34 @@ body {
 }
 
 .form-check-input:not(:checked) {
-  background-color: #FFFFFF;
-  border: 1px solid #CCCCCC;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
 }
 
 .form-check-input:focus {
   box-shadow: none;
+}
+
+/* Paginación */
+.active .page-link {
+  background-color: var(--bg-color1);
+  border-color: var(--bg-color1);
+}
+
+.active .page-link:hover {
+  color: white;
+  background-color: var(--bg-color1);
+}
+
+.page-link {
+  color: black;
+}
+
+.page-link:hover {
+  color: black;
+  background-color: #e4e4e4;
+}
+
+.customSelect {
+  width: 70px;
 }

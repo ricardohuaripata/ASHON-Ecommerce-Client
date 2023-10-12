@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 import { Product } from 'src/app/interfaces/product';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { ErrorService } from 'src/app/services/error.service'; // servicio para mostrar mensajes de errores devueltos por el backend
 import Swal from 'sweetalert2';
 import { FavoritesService } from 'src/app/services/favorites.service';
@@ -24,7 +24,8 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productService.getCollectionByGenre("men").subscribe(
+    // Mostrar 20 producos para hombre más vendidos
+    this.productService.getProducts(new HttpParams().set('filter', '{"genre":"men"}').set('limit', '20').set('sort', '-1,sold')).subscribe(
       (data: any) => {
         this.menProducts = data.products;
       },
@@ -32,8 +33,8 @@ export class HomeComponent implements OnInit {
         this.menProducts = [];
       }
     );
-
-    this.productService.getCollectionByGenre("women").subscribe(
+    // Mostrar 20 producos para mujer más vendidos
+    this.productService.getProducts(new HttpParams().set('filter', '{"genre":"women"}').set('limit', '20').set('sort', '-1,sold')).subscribe(
       (data: any) => {
         this.womenProducts = data.products;
         this.contentLoaded = true;

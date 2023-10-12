@@ -29,17 +29,6 @@ span {
   cursor: pointer;
 }
 
-.size-option-cell:hover,
-.color-option-cell:hover {
-  background-color: #f5f5f5;
-}
-
-.size-option-cell.selected,
-.color-option-cell.selected {
-  background-color: #007bff;
-  color: #fff;
-}
-
 .size-option-text,
 .color-option-text {
   font-size: 14px;

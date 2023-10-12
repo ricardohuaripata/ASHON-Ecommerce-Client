@@ -30,19 +30,7 @@ export class ProductsService {
     return this.http.get<any>(this.serverUrl + this.apiUrl, { params });
   }
 
-  getCollectionByGenre(genre: string): Observable<any> {
-    const params = new HttpParams().set('filter', '{"genre":"' + genre + '"}');
-    return this.http.get<any>(this.serverUrl + this.apiUrl, { params });
-  }
-
-  getCollectionByGenreAndCategory(
-    genre: string,
-    categoryId: string
-  ): Observable<any> {
-    const params = new HttpParams().set(
-      'filter',
-      '{"genre":"' + genre + '","category":"' + categoryId + '"}'
-    );
+  getProducts(params: HttpParams): Observable<any> {
     return this.http.get<any>(this.serverUrl + this.apiUrl, { params });
   }
 
