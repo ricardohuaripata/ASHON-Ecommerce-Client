@@ -147,6 +147,7 @@ export class UserReviewsComponent {
 
   deleteReview(productId: string, reviewId: string) {
     Swal.fire({
+      icon:'warning',
       title: '¿Deseas eliminar esta reseña?',
       focusConfirm: false,
       showCancelButton: true,

@@ -93,8 +93,8 @@ export class ProductDetailComponent implements OnInit {
         });
     } else {
       Swal.fire({
-        icon: 'error',
-        title: 'Por favor, selecciona talla y color',
+        icon: 'info',
+        text: 'Por favor, selecciona talla y color',
         showConfirmButton: false,
         timer: 1500,
         allowOutsideClick: false,
@@ -122,8 +122,16 @@ export class ProductDetailComponent implements OnInit {
         this.isAddingToFavorites = false;
       },
       // si se produce algun error en la peticion
-      error: (event: HttpErrorResponse) => {
-        this._errorService.msgError(event);
+      error: (error: HttpErrorResponse) => {
+        if (error.status === 400) {
+          Swal.fire({
+            icon: 'info',
+            text: 'Este artículo ya está en tu lista de favoritos',
+            showConfirmButton: false,
+            timer: 1500,
+            allowOutsideClick: false,
+          });
+        }
         this.isAddingToFavorites = false;
       },
     });

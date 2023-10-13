@@ -9,6 +9,7 @@ import {
 import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { ErrorService } from '../services/error.service';
+import Swal from 'sweetalert2';
 
 @Injectable()
 export class AddTokenInterceptor implements HttpInterceptor {
@@ -32,6 +33,16 @@ export class AddTokenInterceptor implements HttpInterceptor {
         if (error.status === 401) {
           this._errorService.msgError(error);
           this.router.navigate(['/account/login']);
+          // Server Internal Error
+        } else if (error.status === 500) {
+          // JWT Expired or Malformed
+          if (error.error.error.name.includes('Token')) {
+            localStorage.removeItem('token');
+            this.router.navigate(['/account/login']);
+          } else {
+            this.router.navigate(['/']);
+
+          }
         }
         return throwError(() => error);
       })
