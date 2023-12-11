@@ -8,6 +8,14 @@
 
 <h2 align="center">ASHON STORE</h2>
 
+# Demo "Add to cart"
+
+https://res.cloudinary.com/dmravgyts/video/upload/v1702257921/tfg-ecommerce/ASHON_Demo_-_Add_to_cart.mp4
+
+# Demo "Google login"
+
+https://res.cloudinary.com/dmravgyts/video/upload/v1702257942/tfg-ecommerce/ASHON_Store_-_Google_Login.mp4
+
 ![](screenshots/home-page.png)
 ![](screenshots/products-page-1.png)
 ![](screenshots/products-page-2.png)
