@@ -10,11 +10,11 @@
 
 # Demo "Add to cart"
 
-https://res.cloudinary.com/dmravgyts/video/upload/v1702257921/tfg-ecommerce/ASHON_Demo_-_Add_to_cart.mp4
+![ezgif com-video-to-gif](https://github.com/ricardohuaripata/ASHON-Ecommerce-Client/assets/102578959/0a07b34d-3f9b-425e-8dab-f12eed448673)
 
 # Demo "Google login"
 
-https://res.cloudinary.com/dmravgyts/video/upload/v1702257942/tfg-ecommerce/ASHON_Store_-_Google_Login.mp4
+![ezgif com-video-to-gif (1)](https://github.com/ricardohuaripata/ASHON-Ecommerce-Client/assets/102578959/f12859aa-2523-4adf-9b2a-db504997c6ef)
 
 ![](screenshots/home-page.png)
 ![](screenshots/products-page-1.png)
