@@ -8,25 +8,19 @@
 
 <h2 align="center">ASHON STORE</h2>
 
-# Demo "Add to cart"
+# Demo 1 "Add to cart"
 
-![ezgif com-video-to-gif](https://github.com/ricardohuaripata/ASHON-Ecommerce-Client/assets/102578959/0a07b34d-3f9b-425e-8dab-f12eed448673)
+https://github.com/ricardohuaripata/ASHON-Ecommerce-Client/assets/102578959/9228dcb9-8099-4555-bcc3-ea92eb5eeb5b
 
-# Demo "Google login"
+# Demo 2 "Google login"
 
-![ezgif com-video-to-gif (1)](https://github.com/ricardohuaripata/ASHON-Ecommerce-Client/assets/102578959/f12859aa-2523-4adf-9b2a-db504997c6ef)
+https://github.com/ricardohuaripata/ASHON-Ecommerce-Client/assets/102578959/c420ab55-5a01-49d0-a0bd-da4cbea7545c
 
-![](screenshots/home-page.png)
 ![](screenshots/products-page-1.png)
-![](screenshots/products-page-2.png)
 ![](screenshots/product-page.png)
 ![](screenshots/add-to-cart.png)
-![](screenshots/user-cart-page.png)
 ![](screenshots/payment-gateway-page.png)
 ![](screenshots/search-page.png)
-![](screenshots/user-profile-page.png)
 ![](screenshots/user-reviews-page.png)
 ![](screenshots/user-favorites-page.png)
 ![](screenshots/user-orders-page.png)
-![](screenshots/signin-page.png)
-![](screenshots/signup-page.png)
